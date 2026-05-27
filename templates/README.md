@@ -1,0 +1,38 @@
+# Templates
+
+This folder provides optional templates for preparing questionnaire files before using `$ob-scale-review`.
+
+## Recommended
+
+Use [`ob_scale_review_template.xlsx`](ob_scale_review_template.xlsx) if you want the cleanest review workflow.
+
+It contains:
+
+- `README`: short instructions
+- `Variables`: one row per variable or scale block
+- `Questionnaire`: instruction rows and item rows with source items and Chinese translations/adaptations side by side
+
+## CSV Option
+
+Use these if you prefer plain tables or Google Sheets:
+
+- [`variables_template.csv`](variables_template.csv)
+- [`questionnaire_template.csv`](questionnaire_template.csv)
+
+## You Can Also Skip the Template
+
+If you already have an Excel, Word, Markdown, or plain-text questionnaire draft, upload it and ask:
+
+```text
+Use $ob-scale-review to review this questionnaire draft.
+It is not in your template format, so first infer the structure and tell me what is missing.
+```
+
+## 中文说明
+
+这里提供可选模板。推荐使用 `ob_scale_review_template.xlsx`，其中包含：
+
+- `Variables`：变量名称、中文变量名、条目数、填写者、时间点、量表类型和来源
+- `Questionnaire`：英文原题、中文翻译/改编、来源和备注
+
+如果你已有现成问卷文件，也可以不使用模板，直接让 `$ob-scale-review` 先推断结构并指出缺失信息。
