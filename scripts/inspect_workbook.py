@@ -65,6 +65,7 @@ class IssueRecord:
     variable_name: str
     location: str
     issue_type: str
+    issue_summary: str
     current_text: str
     suggested_text: str
     rationale: str
@@ -290,6 +291,7 @@ def build_issues(variables: list[VariableRecord], items: list[ItemRecord]) -> li
                 variable_name=variable_name,
                 location=location,
                 issue_type=issue_type,
+                issue_summary=summarize_issue(issue_type, variable_name),
                 current_text=current,
                 suggested_text=suggested,
                 rationale=rationale,
@@ -308,14 +310,15 @@ def build_issues(variables: list[VariableRecord], items: list[ItemRecord]) -> li
             else:
                 placeholder_loc = loc
                 placeholder_text = launch_text
-            add("P0", variable_name, placeholder_loc, "placeholder", placeholder_text[:500], "替换所有正式发放前占位符", "问卷中仍有占位符或内部模板文本。", "RA 可直接改")
+            add("P0", variable_name, placeholder_loc, "placeholder", placeholder_text[:500], "替换所有正式发放前占位符", "问卷中仍有占位符或内部模板文本。", "RA 可直接处理")
         elif PLACEHOLDER_RE.search(item.source_original):
             add("P3", variable_name, loc, "source_placeholder", item.source_original, "通常无需修改原英文；确认中文改编已替换具体对象", "原英文成熟量表含模板占位符，这本身不是发放阻断，但审查时要确认中文已完成情境替换。", "仅提示")
         if REVERSE_RE.search(item.source_original):
             add("P3", variable_name, loc, "reverse_item", item.source_original, "确认中文已正向化且后续不再反向计分", "原题标注为反向题；按默认偏好可正向化，但需同步计分说明。", "研究者确认")
         if not item.current_chinese:
-            add("P1", variable_name, loc, "missing_chinese", item.source_original, "补充中文题项或说明该行不是题项", "题项缺少当前中文文本。", "RA 可直接改")
-        if not item.source_original and "自编" not in item.source_reference:
+            add("P1", variable_name, loc, "missing_chinese", item.source_original, "补充中文题项或说明该行不是题项", "题项缺少当前中文文本。", "RA 可直接处理")
+        source_marker = item.source_reference.lower()
+        if not item.source_original and "自编" not in item.source_reference and "self-developed" not in source_marker:
             add("P2", variable_name, loc, "missing_original", item.current_chinese, "补充英文原题，或标注为自编/新增题项", "非自编量表建议保留原英文以便审查翻译与改编。", "研究者确认")
 
     item_counts: dict[str, int] = {}
@@ -354,7 +357,7 @@ def build_issues(variables: list[VariableRecord], items: list[ItemRecord]) -> li
                 expected_known = False
         actual = sum(item_counts[matched_key] for matched_key in matched_keys)
         if expected_known and expected != actual:
-            add("P1", label, loc, "item_count_mismatch", f"清单={expected}, 正文={actual}", "核对变量清单与问卷正文条目数", "条目数不一致会影响量表计分和问卷完整性。", "RA 可直接改")
+            add("P1", label, loc, "item_count_mismatch", f"清单={expected}, 正文={actual}", "核对变量清单与问卷正文条目数", "条目数不一致会影响量表计分和问卷完整性。", "RA 可直接处理")
 
         variable_respondents = {respondent_alias(v.respondent) for v in group if v.respondent}
         item_respondents = {respondent_alias(respondent_by_item_var.get(k, "")) for k in matched_keys if respondent_by_item_var.get(k, "")}
@@ -367,6 +370,23 @@ def build_issues(variables: list[VariableRecord], items: list[ItemRecord]) -> li
             add("P1", label, loc, "wave_mismatch", f"清单={','.join(sorted(variable_waves))}, 正文={','.join(sorted(item_waves))}", "统一时间点设置", "时间点不一致会影响纵向研究设计。", "研究者确认")
 
     return issues
+
+
+def summarize_issue(issue_type: str, variable_name: str) -> str:
+    base = {
+        "placeholder": "正式发放文本仍有占位符",
+        "source_placeholder": "英文原量表有模板占位符，需确认中文已替换",
+        "reverse_item": "原题为反向题，需确认正向化和计分说明",
+        "missing_chinese": "缺少中文题项",
+        "missing_original": "缺少英文原题或新增题项说明",
+        "variable_missing_in_questionnaire": "变量清单中有变量，但正文未匹配到题项",
+        "item_count_mismatch": "变量清单与问卷正文条目数不一致",
+        "respondent_mismatch": "变量清单与正文填写者不一致",
+        "wave_mismatch": "变量清单与正文时间点不一致",
+    }.get(issue_type, "需要人工检查的问题")
+    if variable_name:
+        return f"{variable_name}：{base}"
+    return base
 
 
 def write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str]) -> None:
@@ -433,8 +453,10 @@ def add_table_sheet(
     default_widths = {
         "issue_id": 12,
         "priority": 10,
+        "variable_name": 26,
         "location": 18,
         "issue_type": 20,
+        "issue_summary": 44,
         "current_text": 58,
         "suggested_text": 46,
         "rationale": 48,
@@ -495,8 +517,10 @@ def write_review_workbook(
     issue_fields = [
         "issue_id",
         "priority",
+        "variable_name",
         "location",
         "issue_type",
+        "issue_summary",
         "current_text",
         "suggested_text",
         "rationale",
@@ -554,6 +578,7 @@ def write_html_table(path: Path, title: str, rows: list[dict[str, Any]], fieldna
         "variable_name": "变量/量表",
         "location": "位置",
         "issue_type": "问题类型",
+        "issue_summary": "问题摘要",
         "current_text": "当前文本",
         "suggested_text": "建议处理",
         "rationale": "理由",
@@ -572,9 +597,15 @@ def write_html_table(path: Path, title: str, rows: list[dict[str, Any]], fieldna
         "wave_mismatch": "时间点不一致",
     }
     style = """
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:28px;color:#1f2937}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:28px;color:#1f2937;background:#fff}
 h1{font-size:22px;margin:0 0 16px}
 .hint{color:#64748b;margin:0 0 18px;font-size:13px}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:0 0 18px}
+.metric{border:1px solid #d7dee8;border-radius:8px;padding:10px;background:#f8fafc}
+.metric b{display:block;font-size:20px;margin-top:4px}
+.section{border:1px solid #d7dee8;border-radius:8px;padding:12px 14px;margin:0 0 18px;background:#fbfdff}
+.section h2{font-size:16px;margin:0 0 8px}
+.section ol,.section ul{margin:8px 0 0 22px;padding:0}
 table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.45}
 th{position:sticky;top:0;background:#1f4e78;color:white;text-align:left}
 th,td{border:1px solid #d7dee8;padding:8px;vertical-align:top}
@@ -583,11 +614,39 @@ td{white-space:pre-wrap}
 .priority{font-weight:700;text-align:center;white-space:nowrap}
 .id,.status{white-space:nowrap}
 """
+    counts = {
+        level: sum(1 for row in rows if str(row.get("priority", "")) == level)
+        for level in ["P0", "P1", "P2", "P3"]
+    }
+    blocker_text = "不建议发放：请先处理 P0/P1 问题。" if counts["P0"] or counts["P1"] else "未发现结构性发放阻断；仍建议人工复核翻译和改编。"
+    top_rows = [row for row in rows if str(row.get("priority", "")) in {"P0", "P1"}][:3]
+    top_items = "".join(
+        f"<li><b>{html.escape(str(row.get('priority', '')))}</b> {html.escape(str(row.get('issue_summary', '')))} <span class='hint'>({html.escape(str(row.get('location', '')))}）</span></li>"
+        for row in top_rows
+    ) or "<li>当前没有 P0/P1 问题。请继续检查 P2/P3 和完整评估报告。</li>"
     parts = [
         "<!doctype html><html><head><meta charset='utf-8'>",
         f"<title>{html.escape(title)}</title><style>{style}</style></head><body>",
         f"<h1>{html.escape(title)}</h1>",
         "<p class='hint'>颜色表示优先级：P0 发放阻断，P1 高风险，P2 中风险，P3 低风险/提示。</p>",
+        "<div class='summary'>",
+        f"<div class='metric'>P0 发放阻断<b>{counts['P0']}</b></div>",
+        f"<div class='metric'>P1 高风险<b>{counts['P1']}</b></div>",
+        f"<div class='metric'>P2 中风险<b>{counts['P2']}</b></div>",
+        f"<div class='metric'>P3 提示/低风险<b>{counts['P3']}</b></div>",
+        "</div>",
+        "<div class='section'><h2>结论</h2>",
+        f"<p>{html.escape(blocker_text)}</p>",
+        "<p>建议处理顺序：先修 P0，再处理 P1；RA 先处理占位符、缺失项和格式问题，研究者确认改编、构念和计分问题。</p>",
+        "</div>",
+        "<div class='section'><h2>前三个优先处理问题</h2><ol>",
+        top_items,
+        "</ol></div>",
+        "<div class='section'><h2>下一步建议</h2><ul>",
+        "<li>如果这是初稿：请让 RA 先处理“RA 可直接处理”的问题，再重新运行检查。</li>",
+        "<li>如果准备发放：请做一次 pre-launch check，重点检查占位符、填写者、时间窗口、反应选项和配对风险。</li>",
+        "<li>如果涉及高改编或自编量表：请由研究者确认改编逻辑，并考虑预测试或信效度检验。</li>",
+        "</ul></div>",
         "<table><thead><tr>",
         "".join(f"<th>{html.escape(labels.get(field, field))}</th>" for field in fieldnames),
         "</tr></thead><tbody>",
@@ -665,8 +724,10 @@ def main() -> None:
     issue_fields = list(asdict(issues[0]).keys()) if issues else [
         "issue_id",
         "priority",
+        "variable_name",
         "location",
         "issue_type",
+        "issue_summary",
         "current_text",
         "suggested_text",
         "rationale",

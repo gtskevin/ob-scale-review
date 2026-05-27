@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset='utf-8'><title>量表问卷问题清单</title><style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:28px;color:#1f2937;background:#fff}
+h1{font-size:22px;margin:0 0 16px}
+.hint{color:#64748b;margin:0 0 18px;font-size:13px}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:0 0 18px}
+.metric{border:1px solid #d7dee8;border-radius:8px;padding:10px;background:#f8fafc}
+.metric b{display:block;font-size:20px;margin-top:4px}
+.section{border:1px solid #d7dee8;border-radius:8px;padding:12px 14px;margin:0 0 18px;background:#fbfdff}
+.section h2{font-size:16px;margin:0 0 8px}
+.section ol,.section ul{margin:8px 0 0 22px;padding:0}
+table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.45}
+th{position:sticky;top:0;background:#1f4e78;color:white;text-align:left}
+th,td{border:1px solid #d7dee8;padding:8px;vertical-align:top}
+td{white-space:pre-wrap}
+.P0{background:#f4cccc}.P1{background:#fce5cd}.P2{background:#fff2cc}.P3{background:#d9ead3}
+.priority{font-weight:700;text-align:center;white-space:nowrap}
+.id,.status{white-space:nowrap}
+</style></head><body><h1>量表问卷问题清单</h1><p class='hint'>颜色表示优先级：P0 发放阻断，P1 高风险，P2 中风险，P3 低风险/提示。</p><div class='summary'><div class='metric'>P0 发放阻断<b>2</b></div><div class='metric'>P1 高风险<b>0</b></div><div class='metric'>P2 中风险<b>0</b></div><div class='metric'>P3 提示/低风险<b>0</b></div></div><div class='section'><h2>结论</h2><p>不建议发放：请先处理 P0/P1 问题。</p><p>建议处理顺序：先修 P0，再处理 P1；RA 先处理占位符、缺失项和格式问题，研究者确认改编、构念和计分问题。</p></div><div class='section'><h2>前三个优先处理问题</h2><ol><li><b>P0</b> 员工感知的领导AI倡导：正式发放文本仍有占位符 <span class='hint'>(Questionnaire!row 3）</span></li><li><b>P0</b> 员工工作绩效：变量清单与正文填写者不一致 <span class='hint'>(Variables!row 3）</span></li></ol></div><div class='section'><h2>下一步建议</h2><ul><li>如果这是初稿：请让 RA 先处理“RA 可直接处理”的问题，再重新运行检查。</li><li>如果准备发放：请做一次 pre-launch check，重点检查占位符、填写者、时间窗口、反应选项和配对风险。</li><li>如果涉及高改编或自编量表：请由研究者确认改编逻辑，并考虑预测试或信效度检验。</li></ul></div><table><thead><tr><th>编号</th><th>优先级</th><th>变量/量表</th><th>位置</th><th>问题类型</th><th>问题摘要</th><th>当前文本</th><th>建议处理</th><th>理由</th><th>处理人/动作</th><th>状态</th></tr></thead><tbody><tr class='P0'><td class='id'>I001</td><td class='priority'>P0</td><td class=''>员工感知的领导AI倡导</td><td class=''>Questionnaire!row 3</td><td class=''>占位符未替换</td><td class=''>员工感知的领导AI倡导：正式发放文本仍有占位符</td><td class=''>员工感知的领导AI倡导
+Leader AI Advocacy
+请基于您的领导XX的实际情况作答。（1=非常不符合，5=非常符合）</td><td class=''>替换所有正式发放前占位符</td><td class=''>问卷中仍有占位符或内部模板文本。</td><td class=''>RA 可直接处理</td><td class='status'>待处理</td></tr><tr class='P0'><td class='id'>I002</td><td class='priority'>P0</td><td class=''>员工工作绩效</td><td class=''>Variables!row 3</td><td class=''>填写者不一致</td><td class=''>员工工作绩效：变量清单与正文填写者不一致</td><td class=''>清单=员工, 正文=领导</td><td class=''>统一填写者/评价者设置</td><td class=''>配对问卷中填写者不一致会直接影响数据可用性。</td><td class=''>研究者确认</td><td class='status'>待处理</td></tr></tbody></table></body></html>

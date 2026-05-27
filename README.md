@@ -1,8 +1,8 @@
 # OB Scale Review
 
-**A Codex skill for reviewing organizational behavior survey scales, translated questionnaires, adapted measures, and paired leader-employee surveys.**
+**An Agent Skill for Codex and Claude Code that reviews organizational behavior survey scales, translated questionnaires, adapted measures, and paired leader-employee surveys.**
 
-[中文说明](README.zh-CN.md) | [Template files](templates/)
+[中文说明](README.zh-CN.md) | [Template files](templates/) | [Prompt cookbook](docs/prompt-cookbook.md) | [Claude Code guide](docs/claude-code.md) | [Sample output](examples/sample_issues.html)
 
 OB Scale Review helps researchers catch the problems that often appear between **"we selected the scales"** and **"the questionnaire is ready to launch"**:
 
@@ -26,11 +26,11 @@ Many survey problems are not obvious until data collection is already underway:
 - A questionnaire still contains `XX`, `x月x日`, or internal notes.
 - A reviewer may later ask whether an "adapted" scale is actually a newly developed scale.
 
-This skill gives Codex a domain-specific review workflow for these issues.
+This skill gives Codex or Claude Code a domain-specific review workflow for these issues.
 
 ## Quick Start
 
-Install the skill:
+### Codex
 
 ```bash
 mkdir -p ~/.codex/skills
@@ -41,6 +41,33 @@ Start a new Codex session and ask:
 
 ```text
 Use $ob-scale-review to review my questionnaire Excel file.
+```
+
+### Claude Code
+
+Claude Code supports `SKILL.md`-based Agent Skills. Install the same repository into Claude's personal skills folder:
+
+```bash
+mkdir -p ~/.claude/skills
+git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-scale-review
+```
+
+Start Claude Code and invoke:
+
+```text
+/ob-scale-review review my questionnaire Excel file.
+```
+
+See [Claude Code setup](docs/claude-code.md) for details.
+
+### If You Do Not Use the Command Line
+
+Open Codex or Claude Code and paste:
+
+```text
+Please install this Agent Skill from https://github.com/gtskevin/ob-scale-review into my local skills folder.
+If I am using Codex, install it under ~/.codex/skills/ob-scale-review.
+If I am using Claude Code, install it under ~/.claude/skills/ob-scale-review.
 ```
 
 If your questionnaire is not organized in a standard format, you can still ask:
@@ -69,6 +96,16 @@ The template separates two things:
 2. **Questionnaire items**: source item, current translated/adapted item, source reference, and notes.
 
 This mirrors how many OB and management researchers actually review questionnaires: first checking the research design structure, then checking the item-level wording.
+
+## Can I Use This If...?
+
+| Question | Short answer |
+|---|---|
+| My questionnaire is not in the template format. | Yes. Ask the skill to infer the structure first and list missing information. |
+| I only have a Word document or survey-platform draft. | Yes. The review will focus on structure, instructions, respondent experience, and launch readiness. |
+| I do not have the English source items. | Yes, but translation/adaptation equivalence cannot be fully reviewed. |
+| I use mature Chinese scales. | Yes. The review can focus on respondent clarity, pairing, time windows, response options, and launch blockers. |
+| I am not an OB researcher. | Possibly. The standards are optimized for OB, management, psychology, HRM, and survey-based social science research. |
 
 ## What It Checks
 
@@ -143,6 +180,8 @@ Priority levels:
 | P2 | Medium risk: affects clarity, wording, or respondent experience |
 | P3 | Low risk or reminder: useful for polishing or documentation |
 
+See an anonymized example: [sample HTML issue table](examples/sample_issues.html).
+
 ## Example Prompts
 
 Full review:
@@ -175,6 +214,28 @@ Use $ob-scale-review to inspect this questionnaire draft.
 It may not follow your template. First infer the variables, respondents, waves,
 source items, translated items, and missing information.
 ```
+
+More examples: [Prompt cookbook](docs/prompt-cookbook.md).
+
+## Suggested RA Workflow
+
+1. RA prepares the questionnaire or fills the template.
+2. Run a quick structure check.
+3. RA handles issues marked "RA can handle" first: placeholders, missing sources, item counts, formatting.
+4. The researcher handles issues marked "researcher must confirm": adapted-scale logic, construct meaning, reverse-coded scoring, self-developed items.
+5. Run a pre-launch check after revisions.
+6. Launch the questionnaire only after P0 issues are cleared and P1 issues are either fixed or consciously accepted.
+
+## How to Read the HTML Issue Table
+
+The generated HTML issue table is designed for non-technical review:
+
+- Start with the summary at the top.
+- Fix P0 issues first.
+- Then review P1 issues.
+- Use the `变量/量表` column to locate the affected construct.
+- Use the `处理人/动作` column to decide whether RA can handle it or the researcher must confirm.
+- Do not blindly accept item-rewriting suggestions when they affect construct meaning.
 
 ## Optional Workbook Inspection Script
 
@@ -223,6 +284,12 @@ ob-scale-review/
 ├── README.zh-CN.md
 ├── agents/
 │   └── openai.yaml
+├── docs/
+│   ├── claude-code.md
+│   └── prompt-cookbook.md
+├── examples/
+│   ├── sample_issues.html
+│   └── sample_questionnaire_with_issues.xlsx
 ├── references/
 │   ├── adaptation-review.md
 │   ├── evaluation-rubric.md

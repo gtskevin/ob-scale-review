@@ -9,6 +9,7 @@ Use [`ob_scale_review_template.xlsx`](ob_scale_review_template.xlsx) if you want
 It contains:
 
 - `README`: short instructions
+- `Guide`: column explanations, examples, and common notes
 - `Variables`: one row per variable or scale block
 - `Questionnaire`: instruction rows and item rows with source items and Chinese translations/adaptations side by side
 
@@ -34,5 +35,6 @@ It is not in your template format, so first infer the structure and tell me what
 
 - `Variables`：变量名称、中文变量名、条目数、填写者、时间点、量表类型和来源
 - `Questionnaire`：英文原题、中文翻译/改编、来源和备注
+- `Guide`：每一类字段的填写说明，以及反向题、自编题项、新增题项等示例
 
 如果你已有现成问卷文件，也可以不使用模板，直接让 `$ob-scale-review` 先推断结构并指出缺失信息。

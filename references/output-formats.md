@@ -9,6 +9,7 @@
 | variable_name | Variable/scale name if available |
 | location | Sheet, row, variable, or item |
 | issue_type | translation, adaptation, reverse_item, referent, wave, respondent, source, placeholder, formatting |
+| issue_summary | One short human-readable summary of the issue |
 | current_text | Existing text |
 | suggested_text | Suggested revision |
 | rationale | Why this matters |
@@ -45,7 +46,7 @@ Add these to the right of original content:
 
 - Use HTML for long reports.
 - Use clean, copy-friendly HTML tables as the primary issue/suggestion deliverable.
-- HTML issue tables should use Chinese column headers, priority row colors, and a `变量/量表` column.
+- HTML issue tables should use Chinese column headers, priority row colors, a top summary, top P0/P1 issues, a `变量/量表` column, and a short issue summary.
 - Generate a formatted `.xlsx` workbook only when the user explicitly requests it.
 - Keep CSV/JSON only as machine-readable support files, not as the main user-facing output.
 

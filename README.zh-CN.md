@@ -1,8 +1,8 @@
 # OB Scale Review
 
-**一个用于组织行为学、管理学和心理测量研究的 Codex Skill，帮助检查英文量表翻译、中文问卷改编、配对问卷和正式发放前质量。**
+**一个可用于 Codex 和 Claude Code 的 Agent Skill，帮助组织行为学、管理学和心理测量研究者检查英文量表翻译、中文问卷改编、配对问卷和正式发放前质量。**
 
-[English README](README.md) | [模板文件](templates/)
+[English README](README.md) | [模板文件](templates/) | [提示词手册](docs/prompt-cookbook.md) | [Claude Code 使用说明](docs/claude-code.md) | [示例输出](examples/sample_issues.html)
 
 这个 Skill 适合处理研究中最常见、也最容易出错的一段工作：研究者或研究助理已经选好了量表，正在把英文原始量表翻译或改编成中文问卷，准备发给企业员工、管理者或领导-下属配对样本填写。
 
@@ -31,7 +31,7 @@ OB Scale Review 的目标是让 Codex 按组织行为学、心理测量和问卷
 
 ## 快速开始
 
-安装：
+### Codex 安装
 
 ```bash
 mkdir -p ~/.codex/skills
@@ -42,6 +42,33 @@ git clone https://github.com/gtskevin/ob-scale-review.git ~/.codex/skills/ob-sca
 
 ```text
 用 $ob-scale-review 检查这个问卷 Excel。
+```
+
+### Claude Code 安装
+
+Claude Code 也支持基于 `SKILL.md` 的 Agent Skills。安装到 Claude Code 的个人技能目录：
+
+```bash
+mkdir -p ~/.claude/skills
+git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-scale-review
+```
+
+启动 Claude Code 后使用：
+
+```text
+/ob-scale-review 检查这个问卷 Excel。
+```
+
+详细说明见：[Claude Code 使用说明](docs/claude-code.md)。
+
+### 如果你不会用命令行
+
+可以直接打开 Codex 或 Claude Code，粘贴这段话：
+
+```text
+请帮我把 https://github.com/gtskevin/ob-scale-review 这个 Agent Skill 安装到本地 skills 文件夹。
+如果我使用 Codex，请安装到 ~/.codex/skills/ob-scale-review。
+如果我使用 Claude Code，请安装到 ~/.claude/skills/ob-scale-review。
 ```
 
 如果你的问卷不是模板格式，也可以直接说：
@@ -70,6 +97,16 @@ git clone https://github.com/gtskevin/ob-scale-review.git ~/.codex/skills/ob-sca
 2. **问卷条目**：英文原题、当前中文翻译/改编、来源、备注。
 
 这种结构对应真实研究工作流：先检查变量设计和配对结构，再检查每个量表和条目的翻译、改编与填写体验。
+
+## 我这种情况能用吗？
+
+| 问题 | 简短回答 |
+|---|---|
+| 我的问卷不是模板格式，可以吗？ | 可以。先让 Skill 推断结构，并列出缺失信息。 |
+| 我只有 Word 或问卷星草稿，可以吗？ | 可以。它会更侧重结构、指导语、填写体验和发放前问题。 |
+| 我没有英文原题，可以吗？ | 可以，但无法完整判断翻译和改编是否等价。 |
+| 我用的是中文成熟量表，可以吗？ | 可以，重点检查填写体验、配对结构、时间窗口、反应选项和发放阻断。 |
+| 我不是 OB 研究，可以吗？ | 可能可以，但标准主要面向组织行为学、管理学、心理学、HRM 和问卷研究。 |
 
 ## 它会检查什么
 
@@ -151,6 +188,8 @@ Skill 会站在企业员工和管理者角度检查：
 | P2 | 中风险，影响理解、措辞或填写体验 |
 | P3 | 低风险或提醒，用于润色和记录 |
 
+匿名示例：[HTML 问题清单示例](examples/sample_issues.html)。
+
 ## 示例提示词
 
 完整审阅：
@@ -183,6 +222,25 @@ Skill 会站在企业员工和管理者角度检查：
 它不是模板格式，请先推断变量、填写者、时间点、来源和条目结构，
 再告诉我哪些信息缺失。
 ```
+
+更多示例见：[提示词手册](docs/prompt-cookbook.md)。
+
+## 推荐 RA 协作流程
+
+1. RA 整理问卷或填写模板。
+2. 先运行快速结构检查。
+3. RA 先处理“RA 可直接处理”的问题：占位符、缺失来源、条目数、格式等。
+4. 老师或研究者处理“研究者必须确认”的问题：改编逻辑、构念含义、反向题计分、自编题项。
+5. 修改后再次运行发放前终检。
+6. 只有在 P0 清零、P1 已修复或明确接受后，再正式发放。
+
+## 如何阅读 HTML 问题清单
+
+- 先看顶部摘要。
+- 先处理 P0，再处理 P1。
+- 用 `变量/量表` 列定位具体构念。
+- 用 `处理人/动作` 列判断是 RA 可以处理，还是必须研究者确认。
+- 涉及构念含义和改编逻辑的问题，不要直接全盘接受 AI 修改建议。
 
 ## 可选脚本
 

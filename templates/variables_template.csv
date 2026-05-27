@@ -1,4 +1,6 @@
 变量名称,变量名称-中文,量表条目数,填写人（员工/领导/其他）,Time (T1/T2/T3),问卷编号,量表类型（成熟直译/成熟改编/自编/高度改编/混合）,Source Reference,备注
 AI Self-Efficacy,员工AI自我效能感,1,员工,T1,Employee_T1,成熟直译,"Author, A. A. (2024). Article title. Journal, volume(issue), pages.","sample row; replace with full item count"
 Leader AI Advocacy,员工感知的领导AI倡导,1,员工,T1,Employee_T1,成熟改编,"Author, A. A. (2020). Article title. Journal, volume(issue), pages.","sample row; technology/green advocacy adapted to AI advocacy"
+Leader AI Knowledge,员工感知的领导AI知识水平,1,员工,T1,Employee_T1,成熟改编,"Author, A. A. (1999). Article title. Journal, volume(issue), pages.","sample row; reverse-coded source item rewritten positively"
+AI Impression Management,员工AI印象管理,1,员工,T2,Employee_T2,自编,"Self-developed","sample row; check double-barreled wording, social desirability, and construct contamination"
 Employee Performance,员工工作绩效,1,领导,T3,Leader_T3,成熟直译,"Author, A. A. (2009). Article title. Journal, volume(issue), pages.","sample row; leader-rated"

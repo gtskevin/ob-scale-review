@@ -52,7 +52,7 @@ Choose the mode from the user's request; when unclear, use `formal_review`.
 Default formal review outputs:
 
 1. Chinese review report: executive summary, structure overview, P0/P1 issues, adapted-scale review, translation/expression issues, reverse-item positive wording record, respondent experience, method-writing suggestions, and next-step question about optimized questionnaire.
-2. Copy-friendly HTML tables for issue list and modification suggestions. Use Chinese column headers, priority colors, and include a `变量/量表` column whenever available.
+2. Copy-friendly HTML tables for issue list and modification suggestions. Use Chinese column headers, priority colors, a top summary, top P0/P1 issues, a `变量/量表` column, a short issue summary, and clear action ownership (`RA 可直接处理`, `研究者确认`, `仅提示`) whenever available.
 3. Optional formatted Excel workbook only when the user explicitly wants spreadsheet processing.
 
 Avoid CSV and Excel as the default user-facing output because long questionnaire text is easier to review in the cleaner HTML table. CSV/JSON can be kept as machine-readable support files.
