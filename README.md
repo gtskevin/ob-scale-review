@@ -93,12 +93,6 @@ Use $ob-scale-review to review this questionnaire draft.
 It is not in your template format, so first infer the structure and tell me what is missing.
 ```
 
-### Do I Need to Run the Optional Script?
-
-No. If you install the skill and give Codex or Claude Code an Excel file, the agent should review the file directly.
-
-The bundled script is a helper the agent can use when the local environment supports Python with `pandas` and `openpyxl`. If those dependencies are missing, the agent should fall back to its normal spreadsheet/file-reading tools or tell you exactly what is missing. You do not need to run the script yourself unless you want a standalone HTML issue table outside an agent session.
-
 ## Recommended Input Options
 
 You do **not** have to use the template, but it makes the review cleaner.
@@ -128,7 +122,6 @@ This mirrors how many OB and management researchers actually review questionnair
 | I do not have the English source items. | Yes, but translation/adaptation equivalence cannot be fully reviewed. |
 | I use mature Chinese scales. | Yes. The review can focus on respondent clarity, pairing, time windows, response options, and launch blockers. |
 | I am not an OB researcher. | Possibly. The standards are optimized for OB, management, psychology, HRM, and survey-based social science research. |
-| I installed the skill and simply upload an Excel file. Will it work? | Yes. The agent should inspect the Excel directly. The helper script is optional, not a manual prerequisite. |
 
 ## What It Checks
 
@@ -243,7 +236,7 @@ More examples: [Prompt cookbook](docs/prompt-cookbook.md).
 ## Suggested RA Workflow
 
 1. RA prepares the questionnaire or fills the template.
-2. Run a quick structure check.
+2. Ask the skill to run a quick structure check.
 3. RA handles issues marked "RA can handle" first: placeholders, missing sources, item counts, formatting.
 4. The researcher handles issues marked "researcher must confirm": adapted-scale logic, construct meaning, reverse-coded scoring, self-developed items.
 5. Run a pre-launch check after revisions.
@@ -259,36 +252,6 @@ The generated HTML issue table is designed for non-technical review:
 - Use the `变量/量表` column to locate the affected construct.
 - Use the `处理人/动作` column to decide whether RA can handle it or the researcher must confirm.
 - Do not blindly accept item-rewriting suggestions when they affect construct meaning.
-
-## Optional Workbook Inspection Script
-
-The skill includes a helper script that extracts workbook structure and generates a clean HTML issue list.
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Run:
-
-```bash
-python scripts/inspect_workbook.py path/to/questionnaire.xlsx --outdir outputs/review
-```
-
-Primary output:
-
-```text
-outputs/review/issues.html
-```
-
-Optional spreadsheet output:
-
-```bash
-python scripts/inspect_workbook.py path/to/questionnaire.xlsx --outdir outputs/review --xlsx
-```
-
-The script is intentionally conservative. It catches structural and launch-readiness issues; the full review still depends on the Codex skill's domain reasoning.
 
 ## What This Skill Does Not Do
 
@@ -310,6 +273,8 @@ ob-scale-review/
 ├── docs/
 │   ├── claude-code.md
 │   ├── claude-code.zh-CN.md
+│   ├── developer-advanced.md
+│   ├── developer-advanced.zh-CN.md
 │   ├── opencode.md
 │   ├── opencode.zh-CN.md
 │   ├── other-agents.md

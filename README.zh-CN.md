@@ -94,12 +94,6 @@ git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-sc
 它不是标准模板格式，请先推断变量、填写者、时间点、英文原题、中文题项和缺失信息。
 ```
 
-### 我需要自己运行“可选脚本”吗？
-
-不需要。安装 Skill 后，你直接把 Excel 给 Codex 或 Claude Code，让它用 `$ob-scale-review` 或 `/ob-scale-review` 检查即可。
-
-仓库里的脚本只是辅助工具：如果本地环境有 Python、`pandas` 和 `openpyxl`，agent 可以用它先生成结构化 HTML 问题清单。如果依赖缺失，agent 应该改用自身可用的表格/文件读取能力；只有在没有替代方式时，才需要告诉你缺少什么依赖。普通用户不需要先手动运行脚本。
-
 ## 推荐输入方式
 
 你不一定要使用模板。Skill 支持更现实的工作方式。
@@ -129,7 +123,6 @@ git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-sc
 | 我没有英文原题，可以吗？ | 可以，但无法完整判断翻译和改编是否等价。 |
 | 我用的是中文成熟量表，可以吗？ | 可以，重点检查填写体验、配对结构、时间窗口、反应选项和发放阻断。 |
 | 我不是 OB 研究，可以吗？ | 可能可以，但标准主要面向组织行为学、管理学、心理学、HRM 和问卷研究。 |
-| 安装后直接上传 Excel，会不会报错？ | 正常情况下可以直接检查。脚本是辅助工具，不是用户必须手动运行的前置步骤。 |
 
 ## 它会检查什么
 
@@ -251,7 +244,7 @@ Skill 会站在企业员工和管理者角度检查：
 ## 推荐 RA 协作流程
 
 1. RA 整理问卷或填写模板。
-2. 先运行快速结构检查。
+2. 先让 Skill 做一次快速结构检查。
 3. RA 先处理“RA 可直接处理”的问题：占位符、缺失来源、条目数、格式等。
 4. 老师或研究者处理“研究者必须确认”的问题：改编逻辑、构念含义、反向题计分、自编题项。
 5. 修改后再次运行发放前终检。
@@ -264,36 +257,6 @@ Skill 会站在企业员工和管理者角度检查：
 - 用 `变量/量表` 列定位具体构念。
 - 用 `处理人/动作` 列判断是 RA 可以处理，还是必须研究者确认。
 - 涉及构念含义和改编逻辑的问题，不要直接全盘接受 AI 修改建议。
-
-## 可选脚本
-
-仓库中包含一个辅助脚本，可以读取 Excel 并生成 HTML 问题清单。
-
-安装依赖：
-
-```bash
-pip install -r requirements.txt
-```
-
-运行：
-
-```bash
-python scripts/inspect_workbook.py path/to/questionnaire.xlsx --outdir outputs/review
-```
-
-主要输出：
-
-```text
-outputs/review/issues.html
-```
-
-如果需要 Excel 输出：
-
-```bash
-python scripts/inspect_workbook.py path/to/questionnaire.xlsx --outdir outputs/review --xlsx
-```
-
-脚本只做结构化和发放阻断问题的初步检查。完整审阅仍然依赖 `$ob-scale-review` 的领域判断。
 
 ## 它不会做什么
 
