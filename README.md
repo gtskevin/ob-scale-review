@@ -2,7 +2,7 @@
 
 **An Agent Skill for Codex and Claude Code that reviews organizational behavior survey scales, translated questionnaires, adapted measures, and paired leader-employee surveys.**
 
-[中文说明](README.zh-CN.md) | [Template files](templates/) | [Prompt cookbook](docs/prompt-cookbook.md) | [Claude Code guide](docs/claude-code.md) | [Sample output](examples/sample_issues.html)
+[中文说明](README.zh-CN.md) | [Template files](templates/) | [Prompt cookbook](docs/prompt-cookbook.md) | [Claude Code guide](docs/claude-code.md) | [Other agents](docs/other-agents.md) | [Sample output](examples/sample_issues.html)
 
 ![Sample HTML issue table](examples/sample_issues_screenshot.png)
 
@@ -78,12 +78,26 @@ Start Claude Code and invoke:
 
 See [Claude Code setup](docs/claude-code.md) for details.
 
+### Other Agent Tools
+
+This repository is directly packaged for Codex and Claude Code. Other agents can still use the same review workflow through custom commands or project instruction files:
+
+- [OpenCode setup](docs/opencode.md)
+- [Work Buddy and other Claude Code-based tools](docs/other-agents.md)
+- [Generic AGENTS.md/custom instruction fallback](docs/other-agents.md)
+
 If your questionnaire is not organized in a standard format, you can still ask:
 
 ```text
 Use $ob-scale-review to review this questionnaire draft.
 It is not in your template format, so first infer the structure and tell me what is missing.
 ```
+
+### Do I Need to Run the Optional Script?
+
+No. If you install the skill and give Codex or Claude Code an Excel file, the agent should review the file directly.
+
+The bundled script is a helper the agent can use when the local environment supports Python with `pandas` and `openpyxl`. If those dependencies are missing, the agent should fall back to its normal spreadsheet/file-reading tools or tell you exactly what is missing. You do not need to run the script yourself unless you want a standalone HTML issue table outside an agent session.
 
 ## Recommended Input Options
 
@@ -114,6 +128,7 @@ This mirrors how many OB and management researchers actually review questionnair
 | I do not have the English source items. | Yes, but translation/adaptation equivalence cannot be fully reviewed. |
 | I use mature Chinese scales. | Yes. The review can focus on respondent clarity, pairing, time windows, response options, and launch blockers. |
 | I am not an OB researcher. | Possibly. The standards are optimized for OB, management, psychology, HRM, and survey-based social science research. |
+| I installed the skill and simply upload an Excel file. Will it work? | Yes. The agent should inspect the Excel directly. The helper script is optional, not a manual prerequisite. |
 
 ## What It Checks
 
@@ -295,6 +310,10 @@ ob-scale-review/
 ├── docs/
 │   ├── claude-code.md
 │   ├── claude-code.zh-CN.md
+│   ├── opencode.md
+│   ├── opencode.zh-CN.md
+│   ├── other-agents.md
+│   ├── other-agents.zh-CN.md
 │   ├── prompt-cookbook.md
 │   └── prompt-cookbook.zh-CN.md
 ├── examples/

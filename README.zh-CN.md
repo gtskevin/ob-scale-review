@@ -2,7 +2,7 @@
 
 **一个可用于 Codex 和 Claude Code 的 Agent Skill，帮助组织行为学、管理学和心理测量研究者检查英文量表翻译、中文问卷改编、配对问卷和正式发放前质量。**
 
-[English README](README.md) | [模板文件](templates/) | [提示词手册](docs/prompt-cookbook.zh-CN.md) | [Claude Code 使用说明](docs/claude-code.zh-CN.md) | [示例输出](examples/sample_issues.html)
+[English README](README.md) | [模板文件](templates/) | [提示词手册](docs/prompt-cookbook.zh-CN.md) | [Claude Code 使用说明](docs/claude-code.zh-CN.md) | [其他 Agent](docs/other-agents.zh-CN.md) | [示例输出](examples/sample_issues.html)
 
 ![HTML 问题清单示例](examples/sample_issues_screenshot.png)
 
@@ -79,12 +79,26 @@ git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-sc
 
 详细说明见：[Claude Code 使用说明](docs/claude-code.zh-CN.md)。
 
+### 其他 Agent 工具
+
+本仓库直接支持 Codex 和 Claude Code。其他 agent 可以通过命令或项目说明文件复用同一套审查流程：
+
+- [OpenCode 使用说明](docs/opencode.zh-CN.md)
+- [Work Buddy 和其他 Claude Code 系工具](docs/other-agents.zh-CN.md)
+- [通用 AGENTS.md/custom instruction 方案](docs/other-agents.zh-CN.md)
+
 如果你的问卷不是模板格式，也可以直接说：
 
 ```text
 用 $ob-scale-review 检查这个问卷草稿。
 它不是标准模板格式，请先推断变量、填写者、时间点、英文原题、中文题项和缺失信息。
 ```
+
+### 我需要自己运行“可选脚本”吗？
+
+不需要。安装 Skill 后，你直接把 Excel 给 Codex 或 Claude Code，让它用 `$ob-scale-review` 或 `/ob-scale-review` 检查即可。
+
+仓库里的脚本只是辅助工具：如果本地环境有 Python、`pandas` 和 `openpyxl`，agent 可以用它先生成结构化 HTML 问题清单。如果依赖缺失，agent 应该改用自身可用的表格/文件读取能力；只有在没有替代方式时，才需要告诉你缺少什么依赖。普通用户不需要先手动运行脚本。
 
 ## 推荐输入方式
 
@@ -115,6 +129,7 @@ git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-sc
 | 我没有英文原题，可以吗？ | 可以，但无法完整判断翻译和改编是否等价。 |
 | 我用的是中文成熟量表，可以吗？ | 可以，重点检查填写体验、配对结构、时间窗口、反应选项和发放阻断。 |
 | 我不是 OB 研究，可以吗？ | 可能可以，但标准主要面向组织行为学、管理学、心理学、HRM 和问卷研究。 |
+| 安装后直接上传 Excel，会不会报错？ | 正常情况下可以直接检查。脚本是辅助工具，不是用户必须手动运行的前置步骤。 |
 
 ## 它会检查什么
 

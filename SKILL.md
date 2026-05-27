@@ -28,7 +28,10 @@ Choose the mode from the user's request; when unclear, use `formal_review`.
 
 ## Workflow
 
-1. Inspect the source file structure. For Excel, prefer `scripts/inspect_workbook.py` to summarize sheets, columns, variable blocks, items, sources, placeholders, reverse-coded markers, and obvious consistency issues.
+1. Inspect the source file structure. For Excel, prefer `scripts/inspect_workbook.py` to summarize sheets, columns, variable blocks, items, sources, placeholders, reverse-coded markers, and obvious consistency issues when the local environment can run Python with `pandas` and `openpyxl`.
+   - The user does not need to run this script manually.
+   - If the script dependencies are unavailable, do not fail the review. Use the agent's available spreadsheet/file-reading tools to inspect the workbook, or tell the user what dependency is missing only if no fallback is available.
+   - If the file is not in the template format, first infer its structure and report missing information before judging translation or adaptation quality.
 2. Build a variable-item index: variable name, Chinese name, respondent, wave, item count, source, original item, current Chinese item, notes.
 3. Classify each scale as mature direct translation, mature adapted scale, self-developed scale, highly adapted scale, or mixed scale.
 4. Run blocking checks first: item-count mismatch, respondent mismatch, wave mismatch, missing original/current item text, missing source, placeholders, unresolved internal notes, reverse-scoring conflicts.
