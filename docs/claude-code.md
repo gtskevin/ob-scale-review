@@ -1,5 +1,7 @@
 # Using OB Scale Review with Claude Code
 
+[中文版](claude-code.zh-CN.md)
+
 Claude Code supports Agent Skills defined by a `SKILL.md` file. OB Scale Review is therefore usable in both Codex and Claude Code.
 
 Official Claude Code skill documentation:

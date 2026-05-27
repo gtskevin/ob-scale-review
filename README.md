@@ -4,6 +4,8 @@
 
 [中文说明](README.zh-CN.md) | [Template files](templates/) | [Prompt cookbook](docs/prompt-cookbook.md) | [Claude Code guide](docs/claude-code.md) | [Sample output](examples/sample_issues.html)
 
+![Sample HTML issue table](examples/sample_issues_screenshot.png)
+
 OB Scale Review helps researchers catch the problems that often appear between **"we selected the scales"** and **"the questionnaire is ready to launch"**:
 
 - English source scale items translated into Chinese
@@ -30,7 +32,23 @@ This skill gives Codex or Claude Code a domain-specific review workflow for thes
 
 ## Quick Start
 
-### Codex
+### If You Do Not Use the Command Line
+
+Open Codex or Claude Code and paste:
+
+```text
+Please install this Agent Skill from https://github.com/gtskevin/ob-scale-review into my local skills folder.
+If I am using Codex, install it under ~/.codex/skills/ob-scale-review.
+If I am using Claude Code, install it under ~/.claude/skills/ob-scale-review.
+```
+
+Then start a new session and ask:
+
+```text
+Use $ob-scale-review to review my questionnaire Excel file.
+```
+
+### Codex Command-Line Install
 
 ```bash
 mkdir -p ~/.codex/skills
@@ -43,7 +61,7 @@ Start a new Codex session and ask:
 Use $ob-scale-review to review my questionnaire Excel file.
 ```
 
-### Claude Code
+### Claude Code Command-Line Install
 
 Claude Code supports `SKILL.md`-based Agent Skills. Install the same repository into Claude's personal skills folder:
 
@@ -59,16 +77,6 @@ Start Claude Code and invoke:
 ```
 
 See [Claude Code setup](docs/claude-code.md) for details.
-
-### If You Do Not Use the Command Line
-
-Open Codex or Claude Code and paste:
-
-```text
-Please install this Agent Skill from https://github.com/gtskevin/ob-scale-review into my local skills folder.
-If I am using Codex, install it under ~/.codex/skills/ob-scale-review.
-If I am using Claude Code, install it under ~/.claude/skills/ob-scale-review.
-```
 
 If your questionnaire is not organized in a standard format, you can still ask:
 
@@ -286,7 +294,9 @@ ob-scale-review/
 │   └── openai.yaml
 ├── docs/
 │   ├── claude-code.md
-│   └── prompt-cookbook.md
+│   ├── claude-code.zh-CN.md
+│   ├── prompt-cookbook.md
+│   └── prompt-cookbook.zh-CN.md
 ├── examples/
 │   ├── sample_issues.html
 │   └── sample_questionnaire_with_issues.xlsx
@@ -300,6 +310,7 @@ ob-scale-review/
 │   └── inspect_workbook.py
 └── templates/
     ├── README.md
+    ├── README.zh-CN.md
     ├── ob_scale_review_template.xlsx
     ├── variables_template.csv
     └── questionnaire_template.csv

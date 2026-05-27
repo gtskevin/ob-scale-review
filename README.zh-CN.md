@@ -2,7 +2,9 @@
 
 **一个可用于 Codex 和 Claude Code 的 Agent Skill，帮助组织行为学、管理学和心理测量研究者检查英文量表翻译、中文问卷改编、配对问卷和正式发放前质量。**
 
-[English README](README.md) | [模板文件](templates/) | [提示词手册](docs/prompt-cookbook.md) | [Claude Code 使用说明](docs/claude-code.md) | [示例输出](examples/sample_issues.html)
+[English README](README.md) | [模板文件](templates/) | [提示词手册](docs/prompt-cookbook.zh-CN.md) | [Claude Code 使用说明](docs/claude-code.zh-CN.md) | [示例输出](examples/sample_issues.html)
+
+![HTML 问题清单示例](examples/sample_issues_screenshot.png)
 
 这个 Skill 适合处理研究中最常见、也最容易出错的一段工作：研究者或研究助理已经选好了量表，正在把英文原始量表翻译或改编成中文问卷，准备发给企业员工、管理者或领导-下属配对样本填写。
 
@@ -31,7 +33,23 @@ OB Scale Review 的目标是让 Codex 按组织行为学、心理测量和问卷
 
 ## 快速开始
 
-### Codex 安装
+### 如果你不会用命令行
+
+可以直接打开 Codex 或 Claude Code，粘贴这段话：
+
+```text
+请帮我把 https://github.com/gtskevin/ob-scale-review 这个 Agent Skill 安装到本地 skills 文件夹。
+如果我使用 Codex，请安装到 ~/.codex/skills/ob-scale-review。
+如果我使用 Claude Code，请安装到 ~/.claude/skills/ob-scale-review。
+```
+
+安装后重新开启一个会话，然后说：
+
+```text
+用 $ob-scale-review 检查这个问卷 Excel。
+```
+
+### Codex 命令行安装
 
 ```bash
 mkdir -p ~/.codex/skills
@@ -44,7 +62,7 @@ git clone https://github.com/gtskevin/ob-scale-review.git ~/.codex/skills/ob-sca
 用 $ob-scale-review 检查这个问卷 Excel。
 ```
 
-### Claude Code 安装
+### Claude Code 命令行安装
 
 Claude Code 也支持基于 `SKILL.md` 的 Agent Skills。安装到 Claude Code 的个人技能目录：
 
@@ -59,17 +77,7 @@ git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-sc
 /ob-scale-review 检查这个问卷 Excel。
 ```
 
-详细说明见：[Claude Code 使用说明](docs/claude-code.md)。
-
-### 如果你不会用命令行
-
-可以直接打开 Codex 或 Claude Code，粘贴这段话：
-
-```text
-请帮我把 https://github.com/gtskevin/ob-scale-review 这个 Agent Skill 安装到本地 skills 文件夹。
-如果我使用 Codex，请安装到 ~/.codex/skills/ob-scale-review。
-如果我使用 Claude Code，请安装到 ~/.claude/skills/ob-scale-review。
-```
+详细说明见：[Claude Code 使用说明](docs/claude-code.zh-CN.md)。
 
 如果你的问卷不是模板格式，也可以直接说：
 
@@ -223,7 +231,7 @@ Skill 会站在企业员工和管理者角度检查：
 再告诉我哪些信息缺失。
 ```
 
-更多示例见：[提示词手册](docs/prompt-cookbook.md)。
+更多示例见：[提示词手册](docs/prompt-cookbook.zh-CN.md)。
 
 ## 推荐 RA 协作流程
 

@@ -1,5 +1,7 @@
 # OB Scale Review Prompt Cookbook
 
+[中文版](prompt-cookbook.zh-CN.md)
+
 Use these prompts when you are not sure how to ask for the review.
 
 ## First-Time Use
