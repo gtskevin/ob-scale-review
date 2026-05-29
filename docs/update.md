@@ -2,6 +2,15 @@
 
 OB Scale Review will keep improving. Users who installed it earlier may continue using an older version unless they update it. Treat "update the skill" as a small pre-review step before serious questionnaire review.
 
+## Best Option for Non-Technical Users: Check from the Report
+
+Newer formal review reports should include a "version and update" area near the top or footer:
+
+- `Check for updates`: opens GitHub so users can see whether newer commits exist after their local version.
+- `Copy update prompt`: copies a plain-language prompt that users can paste into Codex, Claude Code, WorkBuddy, or another local agent.
+
+Important: a static HTML report in the browser cannot directly modify local skill files. The link checks GitHub; the local update still happens when the user asks their agent to run the update prompt.
+
 ## Easiest Option: Ask Your Agent to Update It
 
 Paste this into Codex, Claude Code, WorkBuddy, or another local-file-capable agent:

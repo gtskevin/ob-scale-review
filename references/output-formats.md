@@ -58,9 +58,20 @@ Include these columns in the default HTML review page. Add them to the right of 
 - Put the executive summary, issue list, and modification suggestions in that HTML page so the user does not need to read a long Markdown report in chat.
 - Use clean, copy-friendly HTML tables as the primary issue/suggestion format.
 - HTML issue tables should use Chinese column headers, priority row colors, a top summary, top P0/P1 issues, a `变量/量表` column, and a short issue summary.
+- HTML formal reports should include a compact version/update panel near the top and a smaller repeat in the footer: local commit/date when available, `检查新版本` link, and copyable update prompt for non-technical users.
 - Use Markdown only when the user explicitly asks for Markdown or when it is an internal editable source used to render HTML.
 - Generate a formatted `.xlsx` workbook only when the user explicitly requests it.
 - Keep CSV/JSON only as machine-readable support files, not as the main user-facing output.
+
+## HTML update panel fields
+
+| Field | Meaning |
+|---|---|
+| local_commit | Local short SHA if available; otherwise `未知` |
+| commit_date | Local commit date if available; otherwise `未知` |
+| check_update_url | `https://github.com/gtskevin/ob-scale-review/compare/<local-sha>...main` when SHA is available, otherwise `https://github.com/gtskevin/ob-scale-review/commits/main` |
+| update_prompt | Plain-language prompt users can copy into Codex/Claude Code/WorkBuddy |
+| update_note | Explain that the link checks GitHub only; the local skill updates after the Agent runs the update prompt |
 
 ## Recommended review workbook sheets
 

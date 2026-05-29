@@ -229,9 +229,10 @@ The skill defaults to Chinese review outputs:
 1. One concise HTML review page with a 10-minute decision dashboard, P0/P1 action list, researcher-decision list, key suggested revisions, and compact scale-level diagnosis
 2. A short chat summary plus the HTML file link, instead of a long Markdown report in the chat
 3. A prominent disclaimer at both the beginning and end: AI assists review but does not replace expert human review, back-translation, pretesting, or validity evidence
-4. Beginner-friendly instant hover explanations for terms such as `implicit adaptation`, `referent`, `level of analysis`, and `back-translation`
-5. HTML tables with Chinese headers, P0-P3 colors or badges, a `变量/量表` column, `为什么重要`, and `谁来处理`
-6. Markdown, Excel, or a separate optimized questionnaire comparison file only when the user explicitly asks for them
+4. A built-in `Check for updates` link and copyable update prompt so non-technical users can ask their agent to update the skill
+5. Beginner-friendly instant hover explanations for terms such as `implicit adaptation`, `referent`, `level of analysis`, and `back-translation`
+6. HTML tables with Chinese headers, P0-P3 colors or badges, a `变量/量表` column, `为什么重要`, and `谁来处理`
+7. Markdown, Excel, or a separate optimized questionnaire comparison file only when the user explicitly asks for them
 
 Priority levels:
 

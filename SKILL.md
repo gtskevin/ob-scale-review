@@ -21,7 +21,7 @@ Use this skill to review OB/management research questionnaires and scale transla
 - For every P0/P1 issue, include `为什么重要` and `谁来处理` so users understand the methodological consequence and ownership.
 - Distinguish `资料确认`, `模型推断`, and `需源文核验` when the judgment depends on source-text limits.
 - Put a visually prominent disclaimer at both the beginning and end of every formal report: AI helps identify risks but does not replace expert human review, back-translation, pretesting, or validity evidence.
-- Include a small version/update note in formal HTML reports when local git metadata is available: local commit short SHA, commit date, and the repository URL. If the user asks whether their installed skill is current, compare with the remote repository when network access is available; otherwise explain how to update.
+- Include a non-technical update panel in formal HTML reports: local commit short SHA and commit date when available, a visible `检查新版本` link to GitHub, and a copyable prompt that users can paste into Codex/Claude Code/WorkBuddy to update the skill. If the local SHA is known, prefer a GitHub compare link from that SHA to `main`; otherwise link to the repository's commits page.
 - Treat reverse-coded source items according to Huang Mingpeng's default preference: reverse items are usually rewritten into positive wording to reduce respondent confusion. Check whether positive wording is accurate and whether scoring notes are updated; do not mark positive wording as an error by itself.
 - For mature non-adapted scales, do not re-evaluate whether items cover the construct. Check translation equivalence, clarity, response options, respondent experience, and file consistency.
 - For adapted, self-developed, or highly adapted scales, focus on whether the adaptation is defensible to reviewers and whether items have common scale-design problems.
@@ -65,7 +65,7 @@ Choose the mode from the user's request; when unclear, use `formal_review`.
    - Self-developed/highly adapted scales: common item-writing errors and psychometric design risks.
 8. Review respondent experience: ambiguity, referents, team/leader/AI definitions, time windows, sensitive wording, response-option fit.
 9. Produce concise Chinese outputs. For long or structured reviews, make HTML the primary user-facing artifact and keep the chat response short. If using the user's Pretty Doc workflow, save Markdown only as the editable source, render with `pretty-doc path/to/file.md --open`, and link the HTML rather than pasting the Markdown report.
-10. Add a report footer with `OB Scale Review 本地版本`, `commit 日期`, and `更新方式` when possible. Do not interrupt normal review work to browse GitHub for updates unless the user asks for an update check.
+10. Add an update panel and report footer with `OB Scale Review 本地版本`, `commit 日期`, `检查新版本`, and `复制更新提示词` when possible. Do not interrupt normal review work to browse GitHub for updates unless the user asks for an update check.
 
 ## When to load references
 
@@ -80,7 +80,7 @@ Choose the mode from the user's request; when unclear, use `formal_review`.
 
 Default formal review outputs:
 
-1. One user-facing HTML review page in Chinese: prominent opening disclaimer, dashboard, brief beginner guide, top P0/P1 action list, researcher decision list, minimal suggested revised wording table, short scale-level notes, optional appendix, and prominent closing disclaimer.
+1. One user-facing HTML review page in Chinese: prominent opening disclaimer, non-technical update panel, dashboard, brief beginner guide, top P0/P1 action list, researcher decision list, minimal suggested revised wording table, short scale-level notes, optional appendix, and prominent closing disclaimer.
 2. The HTML issue and suggestion tables must be copy-friendly. Use Chinese column headers, priority colors or badges, a top summary, top P0/P1 issues, a `变量/量表` column, `为什么重要`, concrete suggested wording, evidence status (`资料确认` / `模型推断` / `需源文核验`), and clear action ownership (`RA 可直接处理`, `研究者确认`, `建议专家复核`, `仅提示`) whenever available.
 3. Default formal report length target: enough for a researcher to understand the main decisions in 10 minutes. Prefer 5-8 top issues and 10-20 suggested revisions in the main body; put extra item-level details in an appendix.
 4. Optional formatted Excel workbook only when the user explicitly wants spreadsheet processing.
@@ -92,6 +92,14 @@ For install/update requests, prefer these local checks:
 - If the directory is a git clone, update with `git -C <path> pull --ff-only`.
 - If it is not a git repository, back up the old directory and reinstall from `https://github.com/gtskevin/ob-scale-review`.
 - After updating, report the local commit short SHA and commit date.
+
+For report update panels:
+
+- Use the button label `检查新版本`.
+- If local commit SHA is known, link to `https://github.com/gtskevin/ob-scale-review/compare/<local-sha>...main`.
+- If local commit SHA is unknown, link to `https://github.com/gtskevin/ob-scale-review/commits/main`.
+- Include a second button or compact text area labeled `复制更新提示词`, containing a plain-language update request for the user's current agent.
+- Make clear that clicking the link only checks whether a newer GitHub version exists; updating local files still needs the user's Agent to perform the update.
 
 Avoid long Markdown, CSV, and Excel as the default user-facing output because long questionnaire text is easier to review in the cleaner HTML page. CSV/JSON can be kept as machine-readable support files.
 

@@ -13,6 +13,42 @@ The default user-facing output should be an HTML review page, not a long Markdow
 >
 > 本报告由 AI 基于当前问卷文件中的英文原题、中文题项、来源信息和问卷结构生成，属于研究辅助判断。AI 可以帮助发现翻译漂移、改编风险、指导语问题和被试理解风险，但不能替代研究者和领域专家的人工审核。
 
+## 0. 版本与更新
+
+Place this near the top, before the dashboard. It should be useful for non-technical users.
+
+| 项目 | 内容 |
+|---|---|
+| OB Scale Review 本地版本 | commit 短 SHA，如果可获得 |
+| commit 日期 | 如果可获得 |
+| 检查新版本 | Link/button: `检查新版本` |
+| 更新方式 | 复制下面提示词，发给正在使用的 Agent |
+
+If local commit SHA is known, `检查新版本` should link to:
+
+`https://github.com/gtskevin/ob-scale-review/compare/<local-sha>...main`
+
+If local commit SHA is unknown, link to:
+
+`https://github.com/gtskevin/ob-scale-review/commits/main`
+
+Use this copyable prompt:
+
+```text
+请帮我更新 https://github.com/gtskevin/ob-scale-review 这个 Agent Skill。
+请检查 ~/.codex/skills/ob-scale-review 和 ~/.claude/skills/ob-scale-review 是否存在。
+如果目录是 git clone 安装的，请运行 git pull --ff-only 更新。
+如果不是 git 仓库，请先备份旧目录，再从 GitHub 重新安装最新版。
+完成后告诉我当前本地 commit 和日期。
+```
+
+When creating custom HTML, make this a visually compact card with two obvious actions:
+
+- `检查新版本`: opens the GitHub compare/commits link in the browser.
+- `复制更新提示词`: copies the prompt above to clipboard. If clipboard JavaScript is blocked, show the prompt in a selectable text box.
+
+Add a short note: 点击“检查新版本”只会打开 GitHub 页面；本地更新仍需要把提示词发给 Agent 执行。
+
 ## 1. 先看这里：10 分钟决策版
 
 Use a compact dashboard table near the top so readers can quickly decide what to do. Keep this front section short.
