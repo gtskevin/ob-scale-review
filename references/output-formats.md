@@ -13,10 +13,12 @@
 | current_text | Existing text |
 | suggested_text | Suggested revision |
 | rationale | Why this matters |
-| reviewer_action | RA can edit / researcher confirmation needed / note only |
+| evidence_status | 资料确认 / 模型推断 / 需源文核验 |
+| why_it_matters | Plain-language explanation for early-stage doctoral students |
+| reviewer_action | RA 可直接处理 / 研究者确认 / 建议专家复核 / 仅提示 |
 | status | 待处理 / 已采纳 / 不采纳 / 需讨论 |
 
-For translation, adaptation, instruction contamination, and referent-level issues, include concrete evidence in `rationale`: what the source says, what the current Chinese changes, and how that affects measurement or respondent interpretation.
+For translation, adaptation, instruction contamination, and referent-level issues, include concrete evidence in `rationale`: what the source says, what the current Chinese changes, and how that affects measurement or respondent interpretation. `why_it_matters` should be readable by a beginner. `suggested_text` should contain concrete revised wording whenever possible. If one revision depends on theory choice, provide clearly labeled alternatives.
 
 ## Modification suggestion table
 
@@ -30,12 +32,16 @@ For translation, adaptation, instruction contamination, and referent-level issue
 | suggested_chinese | Suggested Chinese item |
 | reason | Concise rationale |
 | priority | P0-P3 |
+| adoption_level | 必须采纳 / 建议采纳 / 研究者确认 / 可选 |
+| reviewer_note | Method or reviewer explanation if needed |
+| evidence_status | 资料确认 / 模型推断 / 需源文核验 |
+| owner | RA 可直接处理 / 研究者确认 / 建议专家复核 / 仅提示 |
 
 For translation suggestions, the `reason` field should name the drift type, such as `新增概念`, `遗漏限定`, `actor shift`, `referent shift`, `level-of-analysis`, `valence shift`, or `back-translation risk`.
 
-## Optimized questionnaire comparison columns
+## Suggested revised wording columns
 
-Add these to the right of original content:
+Include these columns in the default HTML review page. Add them to the right of original content if the user asks for an Excel workbook:
 
 | Column | Purpose |
 |---|---|

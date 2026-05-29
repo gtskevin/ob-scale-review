@@ -205,10 +205,12 @@ It flags ambiguous expressions such as:
 
 The skill defaults to Chinese review outputs:
 
-1. One HTML review page with an executive summary, issue list, modification suggestions, respondent-experience review, and next-step recommendation
+1. One concise HTML review page with a 10-minute decision dashboard, P0/P1 action list, researcher-decision list, key suggested revisions, and compact scale-level diagnosis
 2. A short chat summary plus the HTML file link, instead of a long Markdown report in the chat
-3. HTML tables with Chinese headers, P0-P3 colors, a `变量/量表` column, and a `处理人/动作` column
-4. Markdown, Excel, or an optimized questionnaire comparison table only when the user explicitly asks for them
+3. A prominent disclaimer at both the beginning and end: AI assists review but does not replace expert human review, back-translation, pretesting, or validity evidence
+4. Beginner-friendly instant hover explanations for terms such as `implicit adaptation`, `referent`, `level of analysis`, and `back-translation`
+5. HTML tables with Chinese headers, P0-P3 colors or badges, a `变量/量表` column, `为什么重要`, and `谁来处理`
+6. Markdown, Excel, or a separate optimized questionnaire comparison file only when the user explicitly asks for them
 
 Priority levels:
 
@@ -269,11 +271,12 @@ More examples: [Prompt cookbook](docs/prompt-cookbook.md).
 
 The generated HTML issue table is designed for non-technical review:
 
-- Start with the summary at the top.
+- Start with the 10-minute decision dashboard.
 - Fix P0 issues first.
 - Then review P1 issues.
+- Confirm construct and level-of-analysis decisions before asking an RA to batch-replace item wording.
 - Use the `变量/量表` column to locate the affected construct.
-- Use the `处理人/动作` column to decide whether RA can handle it or the researcher must confirm.
+- Use the `谁来处理` column to decide whether RA can handle it or the researcher/expert must confirm.
 - Do not blindly accept item-rewriting suggestions when they affect construct meaning.
 
 ## What This Skill Does Not Do

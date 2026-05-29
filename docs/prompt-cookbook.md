@@ -84,7 +84,7 @@ variables, respondents, waves, source items, Chinese items, sources, and notes.
 Then tell me what is missing and what can still be reviewed.
 ```
 
-## Ask for an Optimized Comparison Table
+## Ask for a Separate Optimized Comparison Table
 
 ```text
 Use $ob-scale-review to create an optimized questionnaire comparison table
