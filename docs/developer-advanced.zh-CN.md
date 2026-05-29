@@ -2,7 +2,7 @@
 
 [English version](developer-advanced.md)
 
-大多数用户不需要阅读这一页。安装 Skill 后，直接上传 Excel、Word、Markdown 或纯文本问卷，并让 Codex 或 Claude Code 检查即可。
+大多数用户不需要阅读这一页。安装 Skill 后，直接上传 Excel、Word、Markdown 或纯文本问卷，并让 Codex、Claude Code、WorkBuddy 或其他已接入本仓库流程的 agent 检查即可。
 
 本页只面向维护者和希望手动运行辅助脚本的高级用户。
 

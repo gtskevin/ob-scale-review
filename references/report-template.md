@@ -1,6 +1,8 @@
-# Report Template
+# HTML Review Page Content Template
 
 Use Chinese.
+
+The default user-facing output should be an HTML review page, not a long Markdown report pasted into chat. The following structure can be used as the content model for that HTML page. If a Markdown source file is used to render HTML, keep it as an editable source and link the rendered HTML to the user.
 
 ```markdown
 # 量表与问卷检查报告

@@ -9,7 +9,8 @@ Use this skill to review OB/management research questionnaires and scale transla
 
 ## Default stance
 
-- Default mode is **修改建议模式**: produce a Chinese HTML/Markdown report plus clean, copy-friendly HTML issue and suggestion tables.
+- Default mode is **修改建议模式**: produce a concise Chinese chat summary plus a user-facing HTML review page. The HTML should contain the executive summary, issue list, and modification suggestions in one copy-friendly page.
+- Do not output a long Markdown report by default. Use Markdown only as an internal/source format when needed to render HTML, or when the user explicitly asks for Markdown.
 - Do not automatically create a rewritten questionnaire. After the report and suggestion table, ask whether the user wants an optimized comparison questionnaire.
 - For optimized questionnaires, preserve the original columns and add right-side comparison columns such as `AI建议中文`, `修改类型`, `修改理由`, `审稿解释`, `建议采纳级别`, `用户确认`.
 - Treat reverse-coded source items according to Huang Mingpeng's default preference: reverse items are usually rewritten into positive wording to reduce respondent confusion. Check whether positive wording is accurate and whether scoring notes are updated; do not mark positive wording as an error by itself.
@@ -40,7 +41,7 @@ Choose the mode from the user's request; when unclear, use `formal_review`.
    - Adapted mature scales: adaptation logic and reviewer defensibility.
    - Self-developed/highly adapted scales: common item-writing errors and psychometric design risks.
 6. Review respondent experience: ambiguity, referents, team/leader/AI definitions, time windows, sensitive wording, response-option fit.
-7. Produce concise Chinese outputs. If the content is long or structured, follow the user's Pretty Doc rule: save Markdown under `docs/`, render with `pretty-doc path/to/file.md --open`, and link the HTML.
+7. Produce concise Chinese outputs. For long or structured reviews, make HTML the primary user-facing artifact and keep the chat response short. If using the user's Pretty Doc workflow, save Markdown only as the editable source, render with `pretty-doc path/to/file.md --open`, and link the HTML rather than pasting the Markdown report.
 
 ## When to load references
 
@@ -54,11 +55,11 @@ Choose the mode from the user's request; when unclear, use `formal_review`.
 
 Default formal review outputs:
 
-1. Chinese review report: executive summary, structure overview, P0/P1 issues, adapted-scale review, translation/expression issues, reverse-item positive wording record, respondent experience, method-writing suggestions, and next-step question about optimized questionnaire.
-2. Copy-friendly HTML tables for issue list and modification suggestions. Use Chinese column headers, priority colors, a top summary, top P0/P1 issues, a `变量/量表` column, a short issue summary, and clear action ownership (`RA 可直接处理`, `研究者确认`, `仅提示`) whenever available.
+1. One user-facing HTML review page in Chinese: executive summary, structure overview, P0/P1 issues, adapted-scale review, translation/expression issues, reverse-item positive wording record, respondent experience, method-writing suggestions, issue list, modification suggestions, and next-step question about optimized questionnaire.
+2. The HTML issue and suggestion tables must be copy-friendly. Use Chinese column headers, priority colors, a top summary, top P0/P1 issues, a `变量/量表` column, a short issue summary, and clear action ownership (`RA 可直接处理`, `研究者确认`, `仅提示`) whenever available.
 3. Optional formatted Excel workbook only when the user explicitly wants spreadsheet processing.
 
-Avoid CSV and Excel as the default user-facing output because long questionnaire text is easier to review in the cleaner HTML table. CSV/JSON can be kept as machine-readable support files.
+Avoid long Markdown, CSV, and Excel as the default user-facing output because long questionnaire text is easier to review in the cleaner HTML page. CSV/JSON can be kept as machine-readable support files.
 
 ## Boundaries
 

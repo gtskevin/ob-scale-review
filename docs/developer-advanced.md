@@ -2,7 +2,7 @@
 
 [中文版](developer-advanced.zh-CN.md)
 
-Most users do not need this page. After installing the skill, they can upload an Excel, Word, Markdown, or plain-text questionnaire and ask Codex or Claude Code to review it.
+Most users do not need this page. After installing the skill, they can upload an Excel, Word, Markdown, or plain-text questionnaire and ask Codex, Claude Code, WorkBuddy, or another agent connected to this repository's workflow to review it.
 
 This page is for maintainers and advanced users who want to run the helper script directly.
 

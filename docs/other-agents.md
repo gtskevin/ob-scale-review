@@ -2,66 +2,106 @@
 
 [中文版](other-agents.zh-CN.md)
 
-OB Scale Review is packaged natively for Codex and Claude Code. Other agent tools can still reuse the same workflow through compatibility bridges.
+OB Scale Review is not limited to Codex or Claude Code. Its core is a reusable survey-scale review workflow, so any agent that can read this repository's `SKILL.md`, project instructions, or reusable prompts can use it.
+
+For practical use: **install it as a skill when the tool supports skills; otherwise point the agent to this repository as its review instruction.**
 
 ## Support Matrix
 
-| Tool | Recommended setup | Status |
+| Tool | Recommended setup | How to invoke |
 |---|---|---|
-| Codex | `~/.codex/skills/ob-scale-review/SKILL.md` | Native |
-| Claude Code | `~/.claude/skills/ob-scale-review/SKILL.md` or `.claude/skills/` | Native |
-| Work Buddy | Install as a Claude Code skill, because Work Buddy is built on Claude Code | Claude Code path |
-| OpenCode | Create a custom command that points to this repository's `SKILL.md` | Compatibility bridge |
-| Other agents with `AGENTS.md` support | Add a short project instruction pointing to this repository | Compatibility bridge |
-| Generic chat/agent tools | Paste the relevant prompt cookbook entry and upload the questionnaire | Manual fallback |
+| Codex | Install under `~/.codex/skills/ob-scale-review/` | `Use $ob-scale-review to review this questionnaire Excel file` |
+| Claude Code | Install under `~/.claude/skills/ob-scale-review/` | `/ob-scale-review review this questionnaire Excel file` |
+| WorkBuddy / Work Buddy | Install through the Claude Code skill path | `/ob-scale-review review this questionnaire Excel file` |
+| OpenCode | Create a custom command pointing to this repository's `SKILL.md` | `/ob-scale-review review ...` |
+| Cursor | Reference this repository in project rules/instructions | Ask Cursor to read `SKILL.md` before reviewing |
+| Windsurf | Reference this repository in rules, memories, or project instructions | Ask Windsurf to follow the OB Scale Review workflow |
+| Trae | Use project rules or a reusable prompt | Upload the questionnaire and paste the generic prompt |
+| Qoder | Use project instructions or a reusable prompt | Upload the questionnaire and paste the generic prompt |
+| Gemini CLI | Reference this repository through `AGENTS.md` or project context | Ask Gemini to read `SKILL.md` before reviewing |
+| GitHub Copilot CLI / coding agent | Reference this repository through repository instructions | Ask Copilot to follow the workflow and create an HTML review page |
+| Tongyi Lingma, Doubao MarsCode, Tencent Cloud CodeBuddy, and similar tools | Use knowledge files, project rules, or reusable prompts | Upload the questionnaire and paste the generic prompt |
+| Generic chat tools | Paste the prompt and questionnaire content manually | Usable, but less stable than a skill |
 
-## Work Buddy
+## WorkBuddy
 
-Work Buddy is built on Claude Code and MCP, so the simplest path is to install OB Scale Review as a Claude Code skill:
+WorkBuddy's documentation describes it as built on Claude Code and MCP, so the simplest setup is to install through the Claude Code skill path. See [WorkBuddy setup](workbuddy.md).
+
+WorkBuddy docs: https://docs.work-buddy.ai/
+
+Short version:
 
 ```bash
 mkdir -p ~/.claude/skills
 git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-scale-review
 ```
 
-Then use the same Claude Code invocation:
+Invoke:
 
 ```text
-/ob-scale-review review my questionnaire Excel file.
+/ob-scale-review review this questionnaire Excel file.
 ```
 
-If Work Buddy manages a project workspace for you, a project-level install may also be appropriate:
+## OpenCode
+
+OpenCode works best through a custom command. See [OpenCode setup](opencode.md).
+
+## Cursor / Windsurf / Trae / Qoder / Gemini CLI / Copilot
+
+These tools do not all share the same skill mechanism, so this repository does not promise one fixed install directory for all of them. The most reliable approach is to use project instructions or custom rules.
+
+### Option A: Clone the repository into your project
 
 ```bash
-mkdir -p .claude/skills
-git clone https://github.com/gtskevin/ob-scale-review.git .claude/skills/ob-scale-review
+mkdir -p tools
+git clone https://github.com/gtskevin/ob-scale-review.git tools/ob-scale-review
 ```
 
-## AGENTS.md Fallback
-
-For tools that read `AGENTS.md`, add a short project instruction:
+Then add this to your project instructions, rules, memories, custom instructions, or `AGENTS.md`:
 
 ```markdown
-# Survey Scale Review
+# OB Scale Review
 
-When reviewing organizational behavior or management survey questionnaires, use the OB Scale Review workflow from:
+When the user asks to review organizational behavior, management, HRM, leadership,
+AI at work, or psychometrics survey questionnaires, read and follow:
 
 `tools/ob-scale-review/SKILL.md`
 
-Consult its references for evaluation rubric, adapted scale review, respondent experience, and output formats. If an Excel file is available and Python dependencies work, the helper script can be used:
+When needed, consult:
 
-`python tools/ob-scale-review/scripts/inspect_workbook.py <workbook-path> --outdir outputs/ob-scale-review`
+- `tools/ob-scale-review/references/evaluation-rubric.md`
+- `tools/ob-scale-review/references/adaptation-review.md`
+- `tools/ob-scale-review/references/respondent-experience.md`
+- `tools/ob-scale-review/references/output-formats.md`
 
-If the script cannot run, infer the workbook structure from available file contents and continue the review.
+Default to Chinese. Create one HTML review page with an executive summary,
+P0-P3 issue list, modification suggestions, variable/scale names,
+owner/action labels, and next-step recommendations. Do not output a long
+Markdown report in the chat by default.
 ```
 
-## Generic Manual Fallback
+### Option B: Point the agent to GitHub
 
-If your agent does not support skills, commands, or project instruction files:
+If your tool can browse or read GitHub, paste:
 
-1. Upload or point it to the questionnaire file.
-2. Paste a prompt from [prompt-cookbook.md](prompt-cookbook.md).
-3. If possible, also provide `SKILL.md` and the relevant reference file.
-4. Ask it to output a Chinese report and an HTML issue table with P0-P3 priorities.
+```text
+Please read and follow the OB Scale Review workflow in this repository:
+https://github.com/gtskevin/ob-scale-review
 
-This is less reliable than native skill support but still useful.
+I need to review an organizational behavior/management questionnaire.
+Default to Chinese. Output one HTML review page with an executive summary,
+P0-P3 issue list, variable/scale names, modification suggestions,
+owner/action labels, and next-step recommendations. Do not output a long
+Markdown report by default.
+```
+
+## Generic Chat Tools
+
+If the tool cannot install skills or read repository files:
+
+1. Upload the questionnaire file or paste the variables and items.
+2. Copy a prompt from [Prompt cookbook](prompt-cookbook.md).
+3. Ask for a Chinese HTML review page.
+4. If source items, references, respondents, or waves are missing, ask the agent to list missing information before judging adaptation quality.
+
+This fallback is less reliable than a skill, but still useful for non-technical users.

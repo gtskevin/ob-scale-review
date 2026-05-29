@@ -1,8 +1,8 @@
 # OB Scale Review
 
-**An Agent Skill for Codex and Claude Code that reviews organizational behavior survey scales, translated questionnaires, adapted measures, and paired leader-employee surveys.**
+**An Agent Skill for Codex, Claude Code, WorkBuddy, OpenCode, and other instruction-aware agents. It helps organizational behavior, management, and psychometrics researchers review translated scales, adapted Chinese questionnaires, paired surveys, and pre-launch survey quality.**
 
-[中文说明](README.zh-CN.md) | [Template files](templates/) | [Prompt cookbook](docs/prompt-cookbook.md) | [Claude Code guide](docs/claude-code.md) | [Other agents](docs/other-agents.md) | [Sample output](examples/sample_issues.html)
+[中文说明](README.zh-CN.md) | [Template files](templates/) | [Prompt cookbook](docs/prompt-cookbook.md) | [WorkBuddy setup](docs/workbuddy.md) | [Claude Code guide](docs/claude-code.md) | [Other agents](docs/other-agents.md) | [Sample output](examples/sample_issues.html)
 
 ![Sample HTML issue table](examples/sample_issues_screenshot.png)
 
@@ -28,18 +28,20 @@ Many survey problems are not obvious until data collection is already underway:
 - A questionnaire still contains `XX`, `x月x日`, or internal notes.
 - A reviewer may later ask whether an "adapted" scale is actually a newly developed scale.
 
-This skill gives Codex or Claude Code a domain-specific review workflow for these issues.
+This skill gives AI agents a domain-specific review workflow for these issues. It is especially optimized for Chinese-language research workflows: Excel/Word scale files, Chinese survey-platform drafts, paired leader-subordinate surveys, Chinese wording ambiguity, and RA-researcher revision handoffs.
 
 ## Quick Start
 
 ### If You Do Not Use the Command Line
 
-Open Codex or Claude Code and paste:
+Open the agent you use, such as Codex, Claude Code, WorkBuddy, OpenCode, Cursor, Windsurf, Trae, Qoder, Gemini CLI, GitHub Copilot CLI, Tongyi Lingma, Doubao MarsCode, or Tencent Cloud CodeBuddy, and paste:
 
 ```text
 Please install this Agent Skill from https://github.com/gtskevin/ob-scale-review into my local skills folder.
 If I am using Codex, install it under ~/.codex/skills/ob-scale-review.
 If I am using Claude Code, install it under ~/.claude/skills/ob-scale-review.
+If I am using WorkBuddy, prefer the Claude Code skill path: ~/.claude/skills/ob-scale-review.
+If my tool does not support skills, connect this repository as a project instruction or custom command and tell me what to type afterward.
 ```
 
 Then start a new session and ask:
@@ -78,13 +80,34 @@ Start Claude Code and invoke:
 
 See [Claude Code setup](docs/claude-code.md) for details.
 
+### WorkBuddy Install
+
+WorkBuddy's documentation describes it as built on Claude Code and MCP, so the simplest setup is to install OB Scale Review through the Claude Code skill path:
+
+```bash
+mkdir -p ~/.claude/skills
+git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-scale-review
+```
+
+Then use it in a WorkBuddy/Claude Code session:
+
+```text
+/ob-scale-review review my questionnaire Excel file.
+```
+
+If you do not use the command line, paste the non-command-line install request above into WorkBuddy. See [WorkBuddy setup](docs/workbuddy.md) for details.
+
 ### Other Agent Tools
 
-This repository is directly packaged for Codex and Claude Code. Other agents can still use the same review workflow through custom commands or project instruction files:
+This repository is not limited to Codex or Claude Code. Different agents can reuse it through three patterns:
 
+- **Native skill path**: Codex, Claude Code, WorkBuddy.
+- **Custom command path**: OpenCode and agents that support command/prompt files.
+- **Project instruction path**: Cursor, Windsurf, Trae, Qoder, Gemini CLI, GitHub Copilot CLI, Tongyi Lingma, Doubao MarsCode, Tencent Cloud CodeBuddy, and similar tools through `AGENTS.md`, project rules, knowledge files, or reusable prompts.
+
+- [WorkBuddy setup](docs/workbuddy.md)
 - [OpenCode setup](docs/opencode.md)
-- [Work Buddy and other Claude Code-based tools](docs/other-agents.md)
-- [Generic AGENTS.md/custom instruction fallback](docs/other-agents.md)
+- [Other agent setup and compatibility options](docs/other-agents.md)
 
 If your questionnaire is not organized in a standard format, you can still ask:
 
@@ -182,10 +205,10 @@ It flags ambiguous expressions such as:
 
 The skill defaults to Chinese review outputs:
 
-1. A structured Markdown/HTML review report
-2. A clean HTML issue table with Chinese headers, priority colors, and a `变量/量表` column
-3. A modification suggestion table when item-level edits are needed
-4. An optional optimized questionnaire comparison table after the user confirms they want it
+1. One HTML review page with an executive summary, issue list, modification suggestions, respondent-experience review, and next-step recommendation
+2. A short chat summary plus the HTML file link, instead of a long Markdown report in the chat
+3. HTML tables with Chinese headers, P0-P3 colors, a `变量/量表` column, and a `处理人/动作` column
+4. Markdown, Excel, or an optimized questionnaire comparison table only when the user explicitly asks for them
 
 Priority levels:
 
@@ -280,7 +303,9 @@ ob-scale-review/
 │   ├── other-agents.md
 │   ├── other-agents.zh-CN.md
 │   ├── prompt-cookbook.md
-│   └── prompt-cookbook.zh-CN.md
+│   ├── prompt-cookbook.zh-CN.md
+│   ├── workbuddy.md
+│   └── workbuddy.zh-CN.md
 ├── examples/
 │   ├── sample_issues.html
 │   └── sample_questionnaire_with_issues.xlsx
@@ -302,7 +327,7 @@ ob-scale-review/
 
 ## Keywords
 
-organizational behavior, OB research, survey scale review, questionnaire review, scale adaptation, adapted scales, Chinese translation, management research, HRM research, psychology scales, reverse-coded items, leader-employee paired survey, supervisor-subordinate survey, multi-wave survey, AI at work, psychometrics, measurement validity, construct validity, item wording, Codex skill
+organizational behavior, OB research, survey scale review, questionnaire review, scale adaptation, adapted scales, Chinese translation, Chinese researchers, management research, HRM research, psychology scales, reverse-coded items, leader-employee paired survey, supervisor-subordinate survey, multi-wave survey, AI at work, psychometrics, measurement validity, construct validity, item wording, Codex skill, Claude Code skill, WorkBuddy, OpenCode, Cursor, Windsurf, Trae, Qoder
 
 ## License
 

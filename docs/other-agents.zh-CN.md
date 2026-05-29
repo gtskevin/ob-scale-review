@@ -2,66 +2,102 @@
 
 [English version](other-agents.md)
 
-OB Scale Review 原生支持 Codex 和 Claude Code。其他 agent 工具也可以通过兼容方式复用这套审查流程。
+OB Scale Review 不只适用于 Codex 或 Claude Code。它的核心是一套可复用的量表和问卷审查流程，因此只要某个 agent 能读取本仓库的 `SKILL.md`、项目说明或自定义提示词，就可以使用。
+
+对于中国用户，最现实的理解方式是：**能装 Skill 的就装 Skill；不能装 Skill 的，就让 agent 读取这个仓库作为审查说明。**
 
 ## 支持矩阵
 
-| 工具 | 推荐安装方式 | 状态 |
+| 工具 | 推荐接入方式 | 使用方式 |
 |---|---|---|
-| Codex | `~/.codex/skills/ob-scale-review/SKILL.md` | 原生支持 |
-| Claude Code | `~/.claude/skills/ob-scale-review/SKILL.md` 或 `.claude/skills/` | 原生支持 |
-| Work Buddy | 按 Claude Code Skill 安装，因为 Work Buddy 基于 Claude Code | 走 Claude Code 路径 |
-| OpenCode | 创建自定义 command，指向本仓库的 `SKILL.md` | 兼容方案 |
-| 支持 `AGENTS.md` 的 agent | 在项目说明中指向本仓库 | 兼容方案 |
-| 普通聊天/agent 工具 | 粘贴提示词手册中的 prompt，并上传问卷 | 手动方案 |
+| Codex | 安装到 `~/.codex/skills/ob-scale-review/` | `用 $ob-scale-review 检查这个问卷 Excel` |
+| Claude Code | 安装到 `~/.claude/skills/ob-scale-review/` | `/ob-scale-review 检查这个问卷 Excel` |
+| WorkBuddy / Work Buddy | 按 Claude Code Skill 路径安装 | `/ob-scale-review 检查这个问卷 Excel` |
+| OpenCode | 创建自定义 command，指向本仓库 `SKILL.md` | `/ob-scale-review review ...` |
+| Cursor | 在项目规则或说明文件中引用本仓库流程 | 让 Cursor 读取 `SKILL.md` 后审查问卷 |
+| Windsurf | 在 rules / memories / 项目说明中引用本仓库流程 | 让 Windsurf 按 OB Scale Review 流程输出 HTML |
+| Trae | 使用项目规则或自定义提示词 | 上传问卷并粘贴通用提示词 |
+| Qoder | 使用项目说明或自定义提示词 | 上传问卷并粘贴通用提示词 |
+| Gemini CLI | 通过 `AGENTS.md` 或项目上下文引用本仓库 | 让 Gemini 读取 `SKILL.md` 后审查 |
+| GitHub Copilot CLI / coding agent | 通过仓库说明或项目指令引用本仓库 | 让 Copilot 按流程生成 HTML 审阅页 |
+| 通义灵码、豆包 MarsCode、腾讯云 CodeBuddy 等 | 使用知识文件、项目规则或自定义提示词 | 上传问卷并粘贴通用提示词 |
+| 普通聊天工具 | 手动粘贴提示词和问卷内容 | 可用，但稳定性低于 Skill |
 
-## Work Buddy
+## WorkBuddy
 
-Work Buddy 基于 Claude Code 和 MCP，因此最简单的做法是按 Claude Code Skill 安装：
+WorkBuddy 官方文档说明它基于 Claude Code 和 MCP，因此最简单的做法是按 Claude Code Skill 安装。详见：[WorkBuddy 安装说明](workbuddy.zh-CN.md)。
+
+WorkBuddy 官方文档：https://docs.work-buddy.ai/
+
+简版命令：
 
 ```bash
 mkdir -p ~/.claude/skills
 git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-scale-review
 ```
 
-然后使用：
+使用：
 
 ```text
-/ob-scale-review review my questionnaire Excel file.
+/ob-scale-review 检查这个问卷 Excel。
 ```
 
-如果 Work Buddy 管理的是某个具体项目，也可以安装为项目级 skill：
+## OpenCode
+
+OpenCode 推荐用自定义 command。详见：[OpenCode 使用说明](opencode.zh-CN.md)。
+
+## Cursor / Windsurf / Trae / Qoder / Gemini CLI / Copilot
+
+这些工具的 Skill 机制不完全相同，不建议在 README 里承诺某一个固定安装目录。更稳妥的做法是使用项目说明或自定义规则。
+
+### 方式 A：把仓库放到项目里
 
 ```bash
-mkdir -p .claude/skills
-git clone https://github.com/gtskevin/ob-scale-review.git .claude/skills/ob-scale-review
+mkdir -p tools
+git clone https://github.com/gtskevin/ob-scale-review.git tools/ob-scale-review
 ```
 
-## AGENTS.md 兼容方案
-
-如果你的工具会读取 `AGENTS.md`，可以在项目中加入：
+然后在你的项目说明、rules、memories、custom instructions 或 `AGENTS.md` 中加入：
 
 ```markdown
-# Survey Scale Review
+# OB Scale Review
 
-When reviewing organizational behavior or management survey questionnaires, use the OB Scale Review workflow from:
+当用户要求检查组织行为学、管理学、HRM、领导力、AI at work 或心理测量问卷时，
+请读取并遵循：
 
 `tools/ob-scale-review/SKILL.md`
 
-Consult its references for evaluation rubric, adapted scale review, respondent experience, and output formats. If an Excel file is available and Python dependencies work, the helper script can be used:
+必要时参考：
 
-`python tools/ob-scale-review/scripts/inspect_workbook.py <workbook-path> --outdir outputs/ob-scale-review`
+- `tools/ob-scale-review/references/evaluation-rubric.md`
+- `tools/ob-scale-review/references/adaptation-review.md`
+- `tools/ob-scale-review/references/respondent-experience.md`
+- `tools/ob-scale-review/references/output-formats.md`
 
-If the script cannot run, infer the workbook structure from available file contents and continue the review.
+默认输出中文。默认生成一个 HTML 审阅页，包含执行摘要、P0-P3 问题清单、
+修改建议、变量/量表名、处理人/动作和下一步建议。不要在聊天窗口输出很长的 Markdown 报告。
 ```
 
-## 通用手动方案
+### 方式 B：不克隆仓库，直接给 agent 链接
 
-如果你的 agent 不支持 skills、commands 或项目说明文件：
+如果你的工具能联网或读取 GitHub，可以直接粘贴：
 
-1. 上传问卷文件，或提供文件路径。
-2. 从 [prompt-cookbook.zh-CN.md](prompt-cookbook.zh-CN.md) 复制一个提示词。
-3. 如果可以，同时提供 `SKILL.md` 和相关 reference 文件。
-4. 要求它输出中文报告和带 P0-P3 优先级的 HTML 问题清单。
+```text
+请读取并遵循这个仓库中的 OB Scale Review 流程：
+https://github.com/gtskevin/ob-scale-review
 
-这种方式不如原生 Skill 稳定，但仍然有用。
+我要检查组织行为学/管理学问卷。请默认使用中文，输出一个 HTML 审阅页，
+包括执行摘要、P0-P3 问题清单、变量/量表名、修改建议、处理人/动作和下一步建议。
+不要默认输出很长的 Markdown 报告。
+```
+
+## 普通聊天工具
+
+如果工具既不能安装 Skill，也不能读取仓库文件，就使用提示词手册：
+
+1. 上传问卷文件，或粘贴变量和题项。
+2. 从 [提示词手册](prompt-cookbook.zh-CN.md) 复制一个提示词。
+3. 明确要求输出中文 HTML 审阅页。
+4. 如果没有英文原题、来源、填写者或时间点，要让 agent 先列出缺失信息，不要直接判断改编质量。
+
+这种方式不如 Skill 稳定，但对非技术用户仍然可用。

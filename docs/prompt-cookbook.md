@@ -4,12 +4,15 @@
 
 Use these prompts when you are not sure how to ask for the review.
 
+By default, ask the agent for one HTML review page. Keep the chat response short and avoid long Markdown reports unless you explicitly need Markdown.
+
 ## First-Time Use
 
 ```text
 Use $ob-scale-review to inspect this questionnaire file.
 First tell me whether the file has enough information for a full review.
 If anything is missing, list what I need to add before you evaluate translation or adaptation quality.
+Default to a Chinese HTML review page.
 ```
 
 Claude Code:
@@ -17,6 +20,7 @@ Claude Code:
 ```text
 /ob-scale-review inspect this questionnaire file.
 First tell me whether the file has enough information for a full review.
+Default to a Chinese HTML review page. Do not output a long Markdown report in the chat.
 ```
 
 ## Quick RA Check
@@ -33,7 +37,7 @@ missing Chinese items, and launch placeholders.
 Use $ob-scale-review to do a full formal review of this questionnaire.
 Check English-Chinese translation, adapted-scale defensibility, reverse-coded source items,
 self-developed or highly adapted item risks, paired survey structure, respondent ambiguity,
-time windows, response options, and launch-blocking problems.
+time windows, response options, and launch-blocking problems. Output one Chinese HTML review page.
 ```
 
 ## Adapted Scale Review

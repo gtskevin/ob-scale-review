@@ -1,6 +1,6 @@
 # 在 Claude Code 中使用 OB Scale Review
 
-Claude Code 支持基于 `SKILL.md` 的 Agent Skills，因此 OB Scale Review 可以同时用于 Codex 和 Claude Code。
+Claude Code 支持基于 `SKILL.md` 的 Agent Skills，因此 OB Scale Review 可以同时用于 Codex、Claude Code，以及按 Claude Code Skill 路径工作的 WorkBuddy。
 
 Claude Code 官方 Skills 文档：
 

@@ -1,8 +1,8 @@
 # OB Scale Review
 
-**一个可用于 Codex 和 Claude Code 的 Agent Skill，帮助组织行为学、管理学和心理测量研究者检查英文量表翻译、中文问卷改编、配对问卷和正式发放前质量。**
+**一个面向中国组织行为学、管理学和心理测量研究者的 Agent Skill，可用于 Codex、Claude Code、WorkBuddy、OpenCode 以及支持自定义指令的主流 Agent，帮助检查英文量表翻译、中文问卷改编、配对问卷和正式发放前质量。**
 
-[English README](README.md) | [模板文件](templates/) | [提示词手册](docs/prompt-cookbook.zh-CN.md) | [Claude Code 使用说明](docs/claude-code.zh-CN.md) | [其他 Agent](docs/other-agents.zh-CN.md) | [示例输出](examples/sample_issues.html)
+[English README](README.md) | [模板文件](templates/) | [提示词手册](docs/prompt-cookbook.zh-CN.md) | [WorkBuddy 安装](docs/workbuddy.zh-CN.md) | [Claude Code 使用说明](docs/claude-code.zh-CN.md) | [其他 Agent](docs/other-agents.zh-CN.md) | [示例输出](examples/sample_issues.html)
 
 ![HTML 问题清单示例](examples/sample_issues_screenshot.png)
 
@@ -20,7 +20,7 @@
 - T1/T2/T3 时间点和问卷正文不一致。
 - 正式问卷里还残留 `XX`、`x月x日`、内部备注或模板占位符。
 
-OB Scale Review 的目标是让 Codex 按组织行为学、心理测量和问卷填写体验的标准，系统检查这些问题。
+OB Scale Review 的目标是让 AI agent 按组织行为学、心理测量和问卷填写体验的标准，系统检查这些问题。它优先服务中国用户的真实工作场景：Excel/Word 量表整理、问卷星或腾讯问卷草稿、领导-下属配对问卷、中文语境下的表达歧义，以及研究助理和老师之间的修改协作。
 
 ## 谁适合使用
 
@@ -35,12 +35,14 @@ OB Scale Review 的目标是让 Codex 按组织行为学、心理测量和问卷
 
 ### 如果你不会用命令行
 
-可以直接打开 Codex 或 Claude Code，粘贴这段话：
+可以直接打开你正在使用的 Agent，比如 Codex、Claude Code、WorkBuddy、OpenCode、Cursor、Windsurf、Trae、Qoder、Gemini CLI、GitHub Copilot CLI、通义灵码、豆包 MarsCode、腾讯云 CodeBuddy 等，粘贴这段话：
 
 ```text
 请帮我把 https://github.com/gtskevin/ob-scale-review 这个 Agent Skill 安装到本地 skills 文件夹。
 如果我使用 Codex，请安装到 ~/.codex/skills/ob-scale-review。
 如果我使用 Claude Code，请安装到 ~/.claude/skills/ob-scale-review。
+如果我使用 WorkBuddy，请优先按 Claude Code Skill 路径安装到 ~/.claude/skills/ob-scale-review。
+如果我的工具不支持 Skill，请帮我把这个仓库作为项目说明或自定义命令接入，并告诉我之后应该输入什么命令。
 ```
 
 安装后重新开启一个会话，然后说：
@@ -79,13 +81,34 @@ git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-sc
 
 详细说明见：[Claude Code 使用说明](docs/claude-code.zh-CN.md)。
 
+### WorkBuddy 安装
+
+WorkBuddy 官方文档说明它基于 Claude Code 和 MCP，因此最简单的做法是按 Claude Code Skill 路径安装：
+
+```bash
+mkdir -p ~/.claude/skills
+git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-scale-review
+```
+
+然后在 WorkBuddy/Claude Code 会话中使用：
+
+```text
+/ob-scale-review 检查这个问卷 Excel。
+```
+
+如果你不会用命令行，可以直接把上面“如果你不会用命令行”的安装请求发给 WorkBuddy。详细说明见：[WorkBuddy 安装说明](docs/workbuddy.zh-CN.md)。
+
 ### 其他 Agent 工具
 
-本仓库直接支持 Codex 和 Claude Code。其他 agent 可以通过命令或项目说明文件复用同一套审查流程：
+本仓库不是只能用于 Codex 或 Claude Code。不同工具的接入方式不一样，可以按三类理解：
 
+- **原生 Skill 路径**：Codex、Claude Code、WorkBuddy。
+- **自定义命令路径**：OpenCode，以及支持 command/prompt 文件的 agent。
+- **通用项目说明路径**：Cursor、Windsurf、Trae、Qoder、Gemini CLI、GitHub Copilot CLI、通义灵码、豆包 MarsCode、腾讯云 CodeBuddy 等，可通过 `AGENTS.md`、项目规则、知识文件或自定义提示词复用这套审查流程。
+
+- [WorkBuddy 安装说明](docs/workbuddy.zh-CN.md)
 - [OpenCode 使用说明](docs/opencode.zh-CN.md)
-- [Work Buddy 和其他 Claude Code 系工具](docs/other-agents.zh-CN.md)
-- [通用 AGENTS.md/custom instruction 方案](docs/other-agents.zh-CN.md)
+- [其他 Agent 安装与兼容方案](docs/other-agents.zh-CN.md)
 
 如果你的问卷不是模板格式，也可以直接说：
 
@@ -190,10 +213,10 @@ Skill 会站在企业员工和管理者角度检查：
 
 默认输出中文结果：
 
-1. Markdown/HTML 结构化评估报告
-2. 干净的 HTML 问题清单，带中文表头、P0-P3 颜色、`变量/量表` 列
-3. 必要时生成修改建议表
-4. 在用户确认后，再生成优化版问卷对照表
+1. 一个 HTML 审阅页：包含执行摘要、问题清单、修改建议、被试填写体验和下一步建议
+2. 聊天窗口只给简短摘要和 HTML 文件链接，避免输出很长的 Markdown 报告
+3. HTML 表格默认使用中文表头、P0-P3 颜色、`变量/量表` 列和 `处理人/动作` 列
+4. 只有在用户明确要求时，才额外输出 Markdown、Excel 或优化版问卷对照表
 
 优先级说明：
 
@@ -268,7 +291,7 @@ Skill 会站在企业员工和管理者角度检查：
 
 ## 关键词
 
-组织行为学，管理学研究，量表审查，问卷检查，量表翻译，量表改编，中文问卷，反向题，正向化，领导-员工配对问卷，主管-下属问卷，多时间点问卷，AI at work，心理测量，构念效度，条目设计，Codex Skill
+组织行为学，管理学研究，量表审查，问卷检查，量表翻译，量表改编，中文问卷，中国学者，问卷星，反向题，正向化，领导-员工配对问卷，主管-下属问卷，多时间点问卷，AI at work，心理测量，构念效度，条目设计，Codex Skill，Claude Code Skill，WorkBuddy，OpenCode，Cursor，Windsurf，Trae，Qoder
 
 ## 许可证
 

@@ -44,9 +44,11 @@ Add these to the right of original content:
 
 ## File choices
 
-- Use HTML for long reports.
-- Use clean, copy-friendly HTML tables as the primary issue/suggestion deliverable.
+- Use one HTML review page as the default user-facing deliverable for long reviews.
+- Put the executive summary, issue list, and modification suggestions in that HTML page so the user does not need to read a long Markdown report in chat.
+- Use clean, copy-friendly HTML tables as the primary issue/suggestion format.
 - HTML issue tables should use Chinese column headers, priority row colors, a top summary, top P0/P1 issues, a `变量/量表` column, and a short issue summary.
+- Use Markdown only when the user explicitly asks for Markdown or when it is an internal editable source used to render HTML.
 - Generate a formatted `.xlsx` workbook only when the user explicitly requests it.
 - Keep CSV/JSON only as machine-readable support files, not as the main user-facing output.
 
