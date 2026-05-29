@@ -8,13 +8,15 @@
 | priority | P0/P1/P2/P3 |
 | variable_name | Variable/scale name if available |
 | location | Sheet, row, variable, or item |
-| issue_type | translation, adaptation, reverse_item, referent, wave, respondent, source, placeholder, formatting |
+| issue_type | translation, adaptation, instruction_contamination, double_barreled, referent_level, reverse_item, wave, respondent, source, placeholder, formatting |
 | issue_summary | One short human-readable summary of the issue |
 | current_text | Existing text |
 | suggested_text | Suggested revision |
 | rationale | Why this matters |
 | reviewer_action | RA can edit / researcher confirmation needed / note only |
 | status | 待处理 / 已采纳 / 不采纳 / 需讨论 |
+
+For translation, adaptation, instruction contamination, and referent-level issues, include concrete evidence in `rationale`: what the source says, what the current Chinese changes, and how that affects measurement or respondent interpretation.
 
 ## Modification suggestion table
 
@@ -28,6 +30,8 @@
 | suggested_chinese | Suggested Chinese item |
 | reason | Concise rationale |
 | priority | P0-P3 |
+
+For translation suggestions, the `reason` field should name the drift type, such as `新增概念`, `遗漏限定`, `actor shift`, `referent shift`, `level-of-analysis`, `valence shift`, or `back-translation risk`.
 
 ## Optimized questionnaire comparison columns
 

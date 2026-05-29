@@ -29,6 +29,11 @@ PLACEHOLDER_RE = re.compile(
 )
 REVERSE_RE = re.compile(r"\b(reverse|reverse[- ]?coded|reversed|反向|反向计分)\b", re.I)
 TIME_RE = re.compile(r"^T\d+$", re.I)
+INSTRUCTION_CONTAMINATION_RE = re.compile(
+    r"(这里关注的是|而不是|定义为|指的是|以下陈述描述的是您对|以下描述涉及您对)"
+)
+REFERENT_AMBIGUITY_RE = re.compile(r"(本部门|部门|我们|团队成员|他人)")
+DOUBLE_BARRELED_RE = re.compile(r"(和|与|以及|并|同时|或|、)")
 
 
 @dataclass
@@ -269,6 +274,7 @@ def respondent_alias(value: str) -> str:
 def build_issues(variables: list[VariableRecord], items: list[ItemRecord]) -> list[IssueRecord]:
     issues: list[IssueRecord] = []
     seen: set[tuple[str, str, str, str]] = set()
+    flagged_instructions: set[tuple[str, int, str]] = set()
 
     def add(
         priority: str,
@@ -320,6 +326,77 @@ def build_issues(variables: list[VariableRecord], items: list[ItemRecord]) -> li
         source_marker = item.source_reference.lower()
         if not item.source_original and "自编" not in item.source_reference and "self-developed" not in source_marker:
             add("P2", variable_name, loc, "missing_original", item.current_chinese, "补充英文原题，或标注为自编/新增题项", "非自编量表建议保留原英文以便审查翻译与改编。", "研究者确认")
+
+        instruction_key = (item.sheet, item.block_start_row, variable_name)
+        if item.block_instruction and instruction_key not in flagged_instructions:
+            if INSTRUCTION_CONTAMINATION_RE.search(item.block_instruction) and len(item.block_instruction) >= 45:
+                flagged_instructions.add(instruction_key)
+                priority = "P1" if "这里关注的是" in item.block_instruction or "而不是" in item.block_instruction else "P2"
+                add(
+                    priority,
+                    variable_name,
+                    f"{item.sheet}!row {item.block_start_row}",
+                    "instruction_contamination",
+                    item.block_instruction,
+                    "缩短为中性指导语，只保留填写对象、时间窗口和反应选项；避免解释变量定义或排除相邻构念。",
+                    "指导语可能提前暴露构念定义或研究者意图，影响被试填写。",
+                    "研究者确认",
+                )
+
+        if item.current_chinese and REFERENT_AMBIGUITY_RE.search(item.current_chinese):
+            if any(token in item.current_chinese for token in ["本部门", "部门", "我们"]):
+                add(
+                    "P2",
+                    variable_name,
+                    loc,
+                    "referent_level",
+                    item.current_chinese,
+                    "确认理论层级后，将对象改为更明确的“我本人/我的直属领导/我所在工作小组/我直接管理的团队/正式部门”等。",
+                    "题项中的群体或对象可能有多种理解，会影响领导力、团队或配对研究的 level of analysis。",
+                    "研究者确认",
+                )
+
+        if "自编" in item.source_reference or "self-developed" in source_marker:
+            if item.current_chinese and DOUBLE_BARRELED_RE.search(item.current_chinese) and len(item.current_chinese) >= 22:
+                add(
+                    "P2",
+                    variable_name,
+                    loc,
+                    "double_barreled",
+                    item.current_chinese,
+                    "检查是否需要拆成单一含义题项；若保留，说明该题项只测一个核心行为或感知。",
+                    "自编/高度改编题项可能同时包含多个动作、对象或条件，受访者可能只同意其中一部分。",
+                    "研究者确认",
+                )
+
+        if item.source_original and item.current_chinese:
+            source_lower = item.source_original.lower()
+            translation_risks: list[tuple[str, str]] = []
+            if "appropriately" in source_lower and "熟练" in item.current_chinese:
+                translation_risks.append(("translation", "英文强调 appropriately，中文改为“熟练”可能改变强度和能力内涵。"))
+            if "learn" in source_lower and "使用" in item.current_chinese and "学习" not in item.current_chinese and "掌握" not in item.current_chinese:
+                translation_risks.append(("translation", "英文强调 learn/learning，中文偏向实际使用，可能改变构念含义。"))
+            if "inspires me" in source_lower and "启发" in item.current_chinese:
+                translation_risks.append(("translation", "英文 My job inspires me 更接近“工作激励/鼓舞我”，中文“深受启发”可能偏向认知启示。"))
+            if "top managers" in source_lower and ("直属领导" in item.block_instruction or "我的直属领导" in item.current_chinese):
+                translation_risks.append(("adaptation", "英文对象为 top managers，当前问卷对象为直属领导，可能改变领导层级和理论解释。"))
+            if "group members" in source_lower and "我们" in item.current_chinese:
+                translation_risks.append(("referent_level", "英文对象为 group members，中文“我们”可能改变回答对象和聚合层级。"))
+            if "work unit" in source_lower and "部门" in item.current_chinese:
+                translation_risks.append(("referent_level", "英文 work unit 需要明确是工作小组、直接管理团队还是正式部门。"))
+            if "good fit" in source_lower and any(token in item.current_chinese for token in ["较差", "不匹配", "并不"]):
+                translation_risks.append(("adaptation", "英文为正向 fit，中文改成不匹配/负向表达，需确认是否作为反向化或高度改编处理。"))
+            for issue_type, rationale in translation_risks:
+                add(
+                    "P1" if issue_type in {"translation", "adaptation"} else "P2",
+                    variable_name,
+                    loc,
+                    issue_type,
+                    f"EN: {item.source_original}\nCN: {item.current_chinese}",
+                    "逐条核对英文核心含义，并给出可回译的中文改法；若属于改编，补充审稿解释。",
+                    rationale,
+                    "研究者确认",
+                )
 
     item_counts: dict[str, int] = {}
     respondent_by_item_var: dict[str, str] = {}
@@ -379,6 +456,11 @@ def summarize_issue(issue_type: str, variable_name: str) -> str:
         "reverse_item": "原题为反向题，需确认正向化和计分说明",
         "missing_chinese": "缺少中文题项",
         "missing_original": "缺少英文原题或新增题项说明",
+        "instruction_contamination": "指导语可能暴露构念定义或研究者意图",
+        "referent_level": "题项 referent 或研究层级可能不清",
+        "double_barreled": "自编/改编题项可能包含多个含义",
+        "translation": "英文与中文可能存在语义漂移",
+        "adaptation": "改编幅度可能需要审稿解释",
         "variable_missing_in_questionnaire": "变量清单中有变量，但正文未匹配到题项",
         "item_count_mismatch": "变量清单与问卷正文条目数不一致",
         "respondent_mismatch": "变量清单与正文填写者不一致",
@@ -591,6 +673,11 @@ def write_html_table(path: Path, title: str, rows: list[dict[str, Any]], fieldna
         "reverse_item": "反向题正向化提醒",
         "missing_chinese": "缺少中文题项",
         "missing_original": "缺少英文原题",
+        "instruction_contamination": "指导语污染风险",
+        "referent_level": "Referent/层级风险",
+        "double_barreled": "双重含义风险",
+        "translation": "翻译等价风险",
+        "adaptation": "改编解释风险",
         "variable_missing_in_questionnaire": "变量清单与正文不匹配",
         "item_count_mismatch": "条目数不一致",
         "respondent_mismatch": "填写者不一致",
@@ -629,6 +716,9 @@ td{white-space:pre-wrap}
         f"<title>{html.escape(title)}</title><style>{style}</style></head><body>",
         f"<h1>{html.escape(title)}</h1>",
         "<p class='hint'>颜色表示优先级：P0 发放阻断，P1 高风险，P2 中风险，P3 低风险/提示。</p>",
+        "<div class='section'><h2>使用边界</h2>",
+        "<p>这是脚本生成的结构预检和启发式风险清单，不是完整量表审查。正式审查仍需逐题比较英文原文与中文翻译，判断改编合理性、指导语污染、自编题项质量和 referent/level-of-analysis 风险。</p>",
+        "</div>",
         "<div class='summary'>",
         f"<div class='metric'>P0 发放阻断<b>{counts['P0']}</b></div>",
         f"<div class='metric'>P1 高风险<b>{counts['P1']}</b></div>",
@@ -645,6 +735,7 @@ td{white-space:pre-wrap}
         "<div class='section'><h2>下一步建议</h2><ul>",
         "<li>如果这是初稿：请让 RA 先处理“RA 可直接处理”的问题，再重新运行检查。</li>",
         "<li>如果准备发放：请做一次 pre-launch check，重点检查占位符、填写者、时间窗口、反应选项和配对风险。</li>",
+        "<li>如果涉及英文原题：请逐行检查翻译等价，不要只看中文是否通顺。</li>",
         "<li>如果涉及高改编或自编量表：请由研究者确认改编逻辑，并考虑预测试或信效度检验。</li>",
         "</ul></div>",
         "<table><thead><tr>",
@@ -737,7 +828,7 @@ def main() -> None:
     write_csv(args.outdir / "issues.csv", [asdict(i) for i in issues], issue_fields)
     if args.xlsx:
         write_review_workbook(args.outdir / "scale_review_inspection.xlsx", summary, variables, items, issues)
-    write_html_table(args.outdir / "issues.html", "量表问卷问题清单", [asdict(i) for i in issues], issue_fields)
+    write_html_table(args.outdir / "issues.html", "量表问卷结构预检问题清单（非完整评审）", [asdict(i) for i in issues], issue_fields)
 
     print(json.dumps(summary, ensure_ascii=False, indent=2))
 

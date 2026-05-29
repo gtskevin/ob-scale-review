@@ -46,6 +46,8 @@ For each adapted scale:
 | 变量 | 原英文 | 当前中文 | 建议中文 | 理由 | 优先级 |
 |---|---|---|---|---|---|
 
+Include concrete evidence for translation drift: added concept, omitted concept, actor/referent shift, intensity shift, valence shift, or back-translation failure. Do not only say "翻译不准确".
+
 ## 6. 反向题正向化记录
 
 | 变量 | 原英文题项 | 当前中文方向 | 建议 | 计分提醒 |
@@ -56,11 +58,16 @@ For each adapted scale:
 | 位置 | 可能歧义 | 被试可能如何理解 | 建议改法 |
 |---|---|---|---|
 
-## 8. 方法写作建议
+## 8. 指导语污染与研究层级风险
+
+| 位置 | 风险类型 | 当前文本 | 为什么会影响填写/层级判断 | 建议 |
+|---|---|---|---|---|
+
+## 9. 方法写作建议
 
 Provide short draft language for adaptations, positive wording of reverse-coded items, and self-developed/highly adapted items.
 
-## 9. 下一步
+## 10. 下一步
 
 是否需要我基于上述建议生成一个“优化版问卷对照表”？该文件会保留原英文、当前中文，并在右侧增加建议中文、修改理由和是否采纳列，方便逐条比较。
 ```
