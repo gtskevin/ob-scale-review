@@ -2,7 +2,7 @@
 
 **一个面向中国组织行为学、管理学和心理测量研究者的 Agent Skill，可用于 Codex、Claude Code、WorkBuddy、OpenCode 以及支持自定义指令的主流 Agent，帮助检查英文量表翻译、中文问卷改编、配对问卷和正式发放前质量。**
 
-[English README](README.md) | [模板文件](templates/) | [提示词手册](docs/prompt-cookbook.zh-CN.md) | [WorkBuddy 安装](docs/workbuddy.zh-CN.md) | [Claude Code 使用说明](docs/claude-code.zh-CN.md) | [其他 Agent](docs/other-agents.zh-CN.md) | [示例输出](examples/sample_issues.html)
+[English README](README.md) | [模板文件](templates/) | [提示词手册](docs/prompt-cookbook.zh-CN.md) | [安装与更新](docs/update.zh-CN.md) | [WorkBuddy 安装](docs/workbuddy.zh-CN.md) | [Claude Code 使用说明](docs/claude-code.zh-CN.md) | [其他 Agent](docs/other-agents.zh-CN.md) | [示例输出](examples/sample_issues.html)
 
 ![HTML 问题清单示例](examples/sample_issues_screenshot.png)
 
@@ -50,6 +50,27 @@ OB Scale Review 的目标是让 AI agent 按组织行为学、心理测量和问
 ```text
 用 $ob-scale-review 检查这个问卷 Excel。
 ```
+
+### 已经安装过，如何更新？
+
+如果你之前安装过这个 Skill，建议定期更新。不会用命令行的用户可以直接把这段话发给 Codex、Claude Code 或 WorkBuddy：
+
+```text
+请帮我更新 https://github.com/gtskevin/ob-scale-review 这个 Agent Skill。
+请检查 ~/.codex/skills/ob-scale-review 和 ~/.claude/skills/ob-scale-review 是否存在。
+如果目录是 git clone 安装的，请运行 git pull --ff-only 更新。
+如果不是 git 仓库，请先备份旧目录，再从 GitHub 重新安装最新版。
+完成后告诉我当前本地 commit 和日期。
+```
+
+命令行用户可运行：
+
+```bash
+git -C ~/.codex/skills/ob-scale-review pull --ff-only
+git -C ~/.claude/skills/ob-scale-review pull --ff-only
+```
+
+只更新你实际安装过的目录即可。更多说明见：[安装与更新指南](docs/update.zh-CN.md)。
 
 ### Codex 命令行安装
 

@@ -2,7 +2,7 @@
 
 **An Agent Skill for Codex, Claude Code, WorkBuddy, OpenCode, and other instruction-aware agents. It helps organizational behavior, management, and psychometrics researchers review translated scales, adapted Chinese questionnaires, paired surveys, and pre-launch survey quality.**
 
-[中文说明](README.zh-CN.md) | [Template files](templates/) | [Prompt cookbook](docs/prompt-cookbook.md) | [WorkBuddy setup](docs/workbuddy.md) | [Claude Code guide](docs/claude-code.md) | [Other agents](docs/other-agents.md) | [Sample output](examples/sample_issues.html)
+[中文说明](README.zh-CN.md) | [Template files](templates/) | [Prompt cookbook](docs/prompt-cookbook.md) | [Install and update](docs/update.md) | [WorkBuddy setup](docs/workbuddy.md) | [Claude Code guide](docs/claude-code.md) | [Other agents](docs/other-agents.md) | [Sample output](examples/sample_issues.html)
 
 ![Sample HTML issue table](examples/sample_issues_screenshot.png)
 
@@ -49,6 +49,27 @@ Then start a new session and ask:
 ```text
 Use $ob-scale-review to review my questionnaire Excel file.
 ```
+
+### Already Installed? Update It
+
+If you installed this skill earlier, update it regularly. If you do not use the command line, paste this into Codex, Claude Code, or WorkBuddy:
+
+```text
+Please update the Agent Skill at https://github.com/gtskevin/ob-scale-review.
+Check whether ~/.codex/skills/ob-scale-review and ~/.claude/skills/ob-scale-review exist.
+If the directory is a git clone, run git pull --ff-only.
+If it is not a git repository, back up the old directory and reinstall the latest version from GitHub.
+When done, tell me the local commit and commit date.
+```
+
+Command-line users can run:
+
+```bash
+git -C ~/.codex/skills/ob-scale-review pull --ff-only
+git -C ~/.claude/skills/ob-scale-review pull --ff-only
+```
+
+Run only the command for the directory you actually use. See the [install and update guide](docs/update.md) for details.
 
 ### Codex Command-Line Install
 
@@ -307,6 +328,8 @@ ob-scale-review/
 │   ├── other-agents.zh-CN.md
 │   ├── prompt-cookbook.md
 │   ├── prompt-cookbook.zh-CN.md
+│   ├── update.md
+│   ├── update.zh-CN.md
 │   ├── workbuddy.md
 │   └── workbuddy.zh-CN.md
 ├── examples/
