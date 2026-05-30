@@ -9,15 +9,16 @@ Use this skill to review OB/management research questionnaires and scale transla
 
 ## Default stance
 
-- Default mode is **修改建议模式**: produce a concise Chinese chat summary plus a user-facing HTML review page. The HTML should contain the executive summary, issue list, and modification suggestions in one copy-friendly page.
+- Default mode is **修改建议模式**: produce a concise Chinese chat summary plus a user-facing **custom dashboard HTML review page**. The HTML should contain the executive summary, issue list, and modification suggestions in one copy-friendly page.
+- For `formal_review`, the default user-facing artifact must be the **v4 精简仪表盘版** style: card-based layout, visual executive dashboard, prominent disclaimer card, compact update panel with buttons, 10-minute decision section, top action table, researcher decision cards, scale diagnosis cards, and a concise key revision table. Do not rely on plain `pretty-doc` Markdown rendering as the primary formal-review output unless custom HTML generation is unavailable.
 - Do not output a long Markdown report by default. Use Markdown only as an internal/source format when needed to render HTML, or when the user explicitly asks for Markdown.
 - The substantive review must be done by the language model's item-by-item judgment. Rules and scripts only focus attention and extract structure; they do not replace the model's semantic review.
 - By default, include a suggested revised version for problematic items and instructions in the HTML report. Preserve the original wording beside `建议修改版`, `修改理由`, `审稿解释`, `建议采纳级别`, and `研究者确认`.
 - Do not automatically create a separate rewritten questionnaire file unless the user asks for one. The default HTML report should already contain the recommended revised wording needed for review.
-- Formal reports should be usable by early-stage doctoral students without forcing them to read a long report. Use a **progressive disclosure** structure: a short decision-focused front section first, then optional details/appendix later.
+- Formal reports should be usable by early-stage doctoral students without forcing them to read a long report. Use a **progressive disclosure** structure and dashboard UI: a short decision-focused front section first, then optional details/appendix later.
 - Keep the main report concise by default. Put only the launch decision, top risks, researcher decisions, minimal action checklist, and highest-value suggested wording in the front section. Move comprehensive row-by-row notes to an appendix or separate file unless the user explicitly asks for exhaustive review.
 - Explain key scale-review concepts with `{{术语|解释}}` hover glossary syntax and short `> 📖` learning callouts, but only where they help users understand a decision. Avoid turning every issue into a lesson.
-- Put a visual executive dashboard near the top: launch recommendation, P0/P1/P2/P3 counts, RA-action count, researcher-confirmation count, expert-review count, and the first 5-8 actions to take.
+- Put a visual executive dashboard near the top: launch recommendation, P0/P1/P2/P3 counts, RA-action count, researcher-confirmation count, expert-review count, and the first 5-8 actions to take. This should be rendered as visual metric cards, not only as a Markdown table.
 - For every P0/P1 issue, include `为什么重要` and `谁来处理` so users understand the methodological consequence and ownership.
 - Distinguish `资料确认`, `模型推断`, and `需源文核验` when the judgment depends on source-text limits.
 - Put a visually prominent disclaimer at both the beginning and end of every formal report: AI helps identify risks but does not replace expert human review, back-translation, pretesting, or validity evidence.
@@ -64,7 +65,7 @@ Choose the mode from the user's request; when unclear, use `formal_review`.
    - Adapted mature scales: adaptation logic and reviewer defensibility.
    - Self-developed/highly adapted scales: common item-writing errors and psychometric design risks.
 8. Review respondent experience: ambiguity, referents, team/leader/AI definitions, time windows, sensitive wording, response-option fit.
-9. Produce concise Chinese outputs. For long or structured reviews, make HTML the primary user-facing artifact and keep the chat response short. If using the user's Pretty Doc workflow, save Markdown only as the editable source, render with `pretty-doc path/to/file.md --open`, and link the HTML rather than pasting the Markdown report.
+9. Produce concise Chinese outputs. For formal reviews, make a custom v4-style dashboard HTML the primary user-facing artifact and keep the chat response short. If maintaining Markdown, save it only as an editable source or content draft; do not make plain `pretty-doc` output the main formal-review deliverable unless custom HTML generation is blocked. If using the user's Pretty Doc workflow, satisfy the "HTML not chat" principle with the custom dashboard HTML first; optionally also keep/render a Markdown source for editability.
 10. Add an update panel and report footer with `OB Scale Review 本地版本`, `commit 日期`, `检查新版本`, and `复制更新提示词` when possible. Do not interrupt normal review work to browse GitHub for updates unless the user asks for an update check.
 
 ## When to load references
@@ -80,10 +81,11 @@ Choose the mode from the user's request; when unclear, use `formal_review`.
 
 Default formal review outputs:
 
-1. One user-facing HTML review page in Chinese: prominent opening disclaimer, non-technical update panel, dashboard, brief beginner guide, top P0/P1 action list, researcher decision list, minimal suggested revised wording table, short scale-level notes, optional appendix, and prominent closing disclaimer.
+1. One user-facing **custom dashboard HTML** review page in Chinese, using the v4 精简仪表盘版 layout: prominent opening disclaimer, non-technical update panel with `检查新版本` and `复制更新提示词` buttons, visual dashboard metric cards, brief beginner guide, top P0/P1 action list, researcher decision cards, minimal suggested revised wording table, short scale-level notes, optional appendix, and prominent closing disclaimer.
 2. The HTML issue and suggestion tables must be copy-friendly. Use Chinese column headers, priority colors or badges, a top summary, top P0/P1 issues, a `变量/量表` column, `为什么重要`, concrete suggested wording, evidence status (`资料确认` / `模型推断` / `需源文核验`), and clear action ownership (`RA 可直接处理`, `研究者确认`, `建议专家复核`, `仅提示`) whenever available.
 3. Default formal report length target: enough for a researcher to understand the main decisions in 10 minutes. Prefer 5-8 top issues and 10-20 suggested revisions in the main body; put extra item-level details in an appendix.
 4. Optional formatted Excel workbook only when the user explicitly wants spreadsheet processing.
+5. Avoid plain long-document HTML for formal review. A generic Markdown-to-HTML page is acceptable only for quick notes, source drafts, or fallback. If both files exist, link/open the dashboard HTML as the main report and identify the Markdown/plain HTML as secondary source material.
 
 For install/update requests, prefer these local checks:
 
