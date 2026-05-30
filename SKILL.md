@@ -23,7 +23,7 @@ Use this skill to review OB/management research questionnaires and scale transla
 - Distinguish `资料确认`, `模型推断`, and `需源文核验` when the judgment depends on source-text limits.
 - Put a visually prominent disclaimer at both the beginning and end of every formal report: AI helps identify risks but does not replace expert human review, back-translation, pretesting, or validity evidence.
 - Include a non-technical update panel in formal HTML reports: local commit short SHA and commit date when available, a visible `检查新版本` link to GitHub, and a copyable prompt that users can paste into Codex/Claude Code/WorkBuddy to update the skill. If the local SHA is known, prefer a GitHub compare link from that SHA to `main`; otherwise link to the repository's commits page.
-- Treat reverse-coded source items according to Huang Mingpeng's default preference: reverse items are usually rewritten into positive wording to reduce respondent confusion. Check whether positive wording is accurate and whether scoring notes are updated; do not mark positive wording as an error by itself.
+- Treat reverse-coded source items according to the Skill Creator's default review stance: reverse items are usually rewritten into positive wording to reduce respondent confusion. Check whether positive wording is accurate and whether scoring notes are updated; do not mark positive wording as an error by itself.
 - For mature non-adapted scales, do not re-evaluate whether items cover the construct. Check translation equivalence, clarity, response options, respondent experience, and file consistency.
 - For adapted, self-developed, or highly adapted scales, focus on whether the adaptation is defensible to reviewers and whether items have common scale-design problems.
 
