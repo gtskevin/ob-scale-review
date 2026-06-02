@@ -1,8 +1,8 @@
-# Using OB Scale Review with Claude Code
+# Using Survey Scale Review with Claude Code
 
 [中文版](claude-code.zh-CN.md)
 
-Claude Code supports Agent Skills defined by a `SKILL.md` file. OB Scale Review is therefore usable in Codex, Claude Code, and WorkBuddy setups that use the Claude Code skill path.
+Claude Code supports Agent Skills defined by a `SKILL.md` file. Survey Scale Review is therefore usable in Codex, Claude Code, and WorkBuddy setups that use the Claude Code skill path.
 
 Official Claude Code skill documentation:
 
@@ -12,7 +12,7 @@ Official Claude Code skill documentation:
 
 ```bash
 mkdir -p ~/.claude/skills
-git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-scale-review
+git clone https://github.com/gtskevin/survey-scale-review.git ~/.claude/skills/survey-scale-review
 ```
 
 Then start Claude Code:
@@ -24,10 +24,10 @@ claude
 Invoke the skill:
 
 ```text
-/ob-scale-review review my questionnaire Excel file.
+/survey-scale-review review my questionnaire Excel file.
 ```
 
-Claude Code uses the skill directory name as the slash command name, so the command is `/ob-scale-review`.
+Claude Code uses the skill directory name as the slash command name, so the command is `/survey-scale-review`.
 
 ## Install as a Project Skill
 
@@ -35,13 +35,13 @@ If you want the skill available only inside one project repository:
 
 ```bash
 mkdir -p .claude/skills
-git clone https://github.com/gtskevin/ob-scale-review.git .claude/skills/ob-scale-review
+git clone https://github.com/gtskevin/survey-scale-review.git .claude/skills/survey-scale-review
 ```
 
 Then run Claude Code from that project folder and use:
 
 ```text
-/ob-scale-review review this questionnaire draft.
+/survey-scale-review review this questionnaire draft.
 ```
 
 ## Non-Technical Installation Prompt
@@ -49,8 +49,8 @@ Then run Claude Code from that project folder and use:
 If you do not use the command line, open Claude Code and paste:
 
 ```text
-Please install this Agent Skill from https://github.com/gtskevin/ob-scale-review
-as a personal Claude Code skill under ~/.claude/skills/ob-scale-review.
+Please install this Agent Skill from https://github.com/gtskevin/survey-scale-review
+as a personal Claude Code skill under ~/.claude/skills/survey-scale-review.
 Then tell me how to invoke it.
 ```
 
@@ -59,7 +59,7 @@ Then tell me how to invoke it.
 Full review:
 
 ```text
-/ob-scale-review review this Excel questionnaire.
+/survey-scale-review review this Excel questionnaire.
 Focus on translation quality, adapted scale defensibility, reverse-coded item handling,
 leader-employee pairing, respondent ambiguity, and launch-blocking problems.
 ```
@@ -67,7 +67,7 @@ leader-employee pairing, respondent ambiguity, and launch-blocking problems.
 Pre-launch check:
 
 ```text
-/ob-scale-review do a pre-launch check.
+/survey-scale-review do a pre-launch check.
 Do not rewrite every item; focus on placeholders, confusing instructions,
 respondent mismatch, time windows, response options, and pairing risks.
 ```
@@ -75,7 +75,7 @@ respondent mismatch, time windows, response options, and pairing risks.
 Non-template file:
 
 ```text
-/ob-scale-review inspect this questionnaire draft.
+/survey-scale-review inspect this questionnaire draft.
 It may not follow the template. First infer variables, respondents, waves,
 source items, translated items, and missing information.
 ```
@@ -84,4 +84,4 @@ source items, translated items, and missing information.
 
 - Claude Code skills live under `~/.claude/skills/<skill-name>/SKILL.md` for personal use or `.claude/skills/<skill-name>/SKILL.md` for project use.
 - Existing `.claude/commands/` workflows are still supported by Claude Code, but `SKILL.md` skills are the recommended format for reusable procedures with supporting files.
-- OB Scale Review includes references, templates, and a helper script; keep the whole repository folder together when installing.
+- Survey Scale Review includes references, templates, and a helper script; keep the whole repository folder together when installing.

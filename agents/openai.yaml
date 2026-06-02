@@ -1,6 +1,6 @@
 interface:
-  display_name: "OB Scale Review"
-  short_description: "Review OB survey scales and questionnaire wording"
-  default_prompt: "Use $ob-scale-review to review this research questionnaire's scale translation, adaptation logic, and launch-readiness issues."
+  display_name: "Survey Scale Review"
+  short_description: "Review research survey scales and questionnaire wording"
+  default_prompt: "Use $survey-scale-review to review this research questionnaire's scale translation, adaptation logic, and launch-readiness issues."
 policy:
   allow_implicit_invocation: true

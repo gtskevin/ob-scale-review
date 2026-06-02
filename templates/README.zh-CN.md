@@ -2,11 +2,11 @@
 
 [English version](README.md)
 
-这个文件夹提供 `$ob-scale-review` 的可选模板。不是必须使用模板，但使用模板可以让审阅更稳定。
+这个文件夹提供 `$survey-scale-review` 的可选模板。不是必须使用模板，但使用模板可以让审阅更稳定。
 
 ## 推荐模板
 
-优先使用 [`ob_scale_review_template.xlsx`](ob_scale_review_template.xlsx)。
+优先使用 [`survey_scale_review_template.xlsx`](survey_scale_review_template.xlsx)。
 
 它包含：
 
@@ -27,7 +27,7 @@
 如果你已有 Excel、Word、Markdown 或纯文本问卷草稿，可以直接上传并说：
 
 ```text
-用 $ob-scale-review 检查这个问卷草稿。
+用 $survey-scale-review 检查这个问卷草稿。
 它不是模板格式，请先推断变量、填写者、时间点、来源和条目结构，
 再告诉我哪些信息缺失。
 ```

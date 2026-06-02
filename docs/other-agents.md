@@ -2,7 +2,7 @@
 
 [中文版](other-agents.zh-CN.md)
 
-OB Scale Review is not limited to Codex or Claude Code. Its core is a reusable survey-scale review workflow, so any agent that can read this repository's `SKILL.md`, project instructions, or reusable prompts can use it.
+Survey Scale Review is not limited to Codex or Claude Code. Its core is a reusable survey-scale review workflow, so any agent that can read this repository's `SKILL.md`, project instructions, or reusable prompts can use it.
 
 For practical use: **install it as a skill when the tool supports skills; otherwise point the agent to this repository as its review instruction.**
 
@@ -10,12 +10,12 @@ For practical use: **install it as a skill when the tool supports skills; otherw
 
 | Tool | Recommended setup | How to invoke |
 |---|---|---|
-| Codex | Install under `~/.codex/skills/ob-scale-review/` | `Use $ob-scale-review to review this questionnaire Excel file` |
-| Claude Code | Install under `~/.claude/skills/ob-scale-review/` | `/ob-scale-review review this questionnaire Excel file` |
-| WorkBuddy / Work Buddy | Install through the Claude Code skill path | `/ob-scale-review review this questionnaire Excel file` |
-| OpenCode | Create a custom command pointing to this repository's `SKILL.md` | `/ob-scale-review review ...` |
+| Codex | Install under `~/.codex/skills/survey-scale-review/` | `Use $survey-scale-review to review this questionnaire Excel file` |
+| Claude Code | Install under `~/.claude/skills/survey-scale-review/` | `/survey-scale-review review this questionnaire Excel file` |
+| WorkBuddy / Work Buddy | Install through the Claude Code skill path | `/survey-scale-review review this questionnaire Excel file` |
+| OpenCode | Create a custom command pointing to this repository's `SKILL.md` | `/survey-scale-review review ...` |
 | Cursor | Reference this repository in project rules/instructions | Ask Cursor to read `SKILL.md` before reviewing |
-| Windsurf | Reference this repository in rules, memories, or project instructions | Ask Windsurf to follow the OB Scale Review workflow |
+| Windsurf | Reference this repository in rules, memories, or project instructions | Ask Windsurf to follow the Survey Scale Review workflow |
 | Trae | Use project rules or a reusable prompt | Upload the questionnaire and paste the generic prompt |
 | Qoder | Use project instructions or a reusable prompt | Upload the questionnaire and paste the generic prompt |
 | Gemini CLI | Reference this repository through `AGENTS.md` or project context | Ask Gemini to read `SKILL.md` before reviewing |
@@ -33,13 +33,13 @@ Short version:
 
 ```bash
 mkdir -p ~/.claude/skills
-git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-scale-review
+git clone https://github.com/gtskevin/survey-scale-review.git ~/.claude/skills/survey-scale-review
 ```
 
 Invoke:
 
 ```text
-/ob-scale-review review this questionnaire Excel file.
+/survey-scale-review review this questionnaire Excel file.
 ```
 
 ## OpenCode
@@ -54,25 +54,25 @@ These tools do not all share the same skill mechanism, so this repository does n
 
 ```bash
 mkdir -p tools
-git clone https://github.com/gtskevin/ob-scale-review.git tools/ob-scale-review
+git clone https://github.com/gtskevin/survey-scale-review.git tools/survey-scale-review
 ```
 
 Then add this to your project instructions, rules, memories, custom instructions, or `AGENTS.md`:
 
 ```markdown
-# OB Scale Review
+# Survey Scale Review
 
 When the user asks to review organizational behavior, management, HRM, leadership,
 AI at work, or psychometrics survey questionnaires, read and follow:
 
-`tools/ob-scale-review/SKILL.md`
+`tools/survey-scale-review/SKILL.md`
 
 When needed, consult:
 
-- `tools/ob-scale-review/references/evaluation-rubric.md`
-- `tools/ob-scale-review/references/adaptation-review.md`
-- `tools/ob-scale-review/references/respondent-experience.md`
-- `tools/ob-scale-review/references/output-formats.md`
+- `tools/survey-scale-review/references/evaluation-rubric.md`
+- `tools/survey-scale-review/references/adaptation-review.md`
+- `tools/survey-scale-review/references/respondent-experience.md`
+- `tools/survey-scale-review/references/output-formats.md`
 
 Default to Chinese. Create one HTML review page with an executive summary,
 P0-P3 issue list, modification suggestions, variable/scale names,
@@ -85,8 +85,8 @@ Markdown report in the chat by default.
 If your tool can browse or read GitHub, paste:
 
 ```text
-Please read and follow the OB Scale Review workflow in this repository:
-https://github.com/gtskevin/ob-scale-review
+Please read and follow the Survey Scale Review workflow in this repository:
+https://github.com/gtskevin/survey-scale-review
 
 I need to review an organizational behavior/management questionnaire.
 Default to Chinese. Output one HTML review page with an executive summary,

@@ -2,7 +2,7 @@
 
 [English version](other-agents.md)
 
-OB Scale Review 不只适用于 Codex 或 Claude Code。它的核心是一套可复用的量表和问卷审查流程，因此只要某个 agent 能读取本仓库的 `SKILL.md`、项目说明或自定义提示词，就可以使用。
+Survey Scale Review 不只适用于 Codex 或 Claude Code。它的核心是一套可复用的量表和问卷审查流程，因此只要某个 agent 能读取本仓库的 `SKILL.md`、项目说明或自定义提示词，就可以使用。
 
 对于中国用户，最现实的理解方式是：**能装 Skill 的就装 Skill；不能装 Skill 的，就让 agent 读取这个仓库作为审查说明。**
 
@@ -10,12 +10,12 @@ OB Scale Review 不只适用于 Codex 或 Claude Code。它的核心是一套可
 
 | 工具 | 推荐接入方式 | 使用方式 |
 |---|---|---|
-| Codex | 安装到 `~/.codex/skills/ob-scale-review/` | `用 $ob-scale-review 检查这个问卷 Excel` |
-| Claude Code | 安装到 `~/.claude/skills/ob-scale-review/` | `/ob-scale-review 检查这个问卷 Excel` |
-| WorkBuddy / Work Buddy | 按 Claude Code Skill 路径安装 | `/ob-scale-review 检查这个问卷 Excel` |
-| OpenCode | 创建自定义 command，指向本仓库 `SKILL.md` | `/ob-scale-review review ...` |
+| Codex | 安装到 `~/.codex/skills/survey-scale-review/` | `用 $survey-scale-review 检查这个问卷 Excel` |
+| Claude Code | 安装到 `~/.claude/skills/survey-scale-review/` | `/survey-scale-review 检查这个问卷 Excel` |
+| WorkBuddy / Work Buddy | 按 Claude Code Skill 路径安装 | `/survey-scale-review 检查这个问卷 Excel` |
+| OpenCode | 创建自定义 command，指向本仓库 `SKILL.md` | `/survey-scale-review review ...` |
 | Cursor | 在项目规则或说明文件中引用本仓库流程 | 让 Cursor 读取 `SKILL.md` 后审查问卷 |
-| Windsurf | 在 rules / memories / 项目说明中引用本仓库流程 | 让 Windsurf 按 OB Scale Review 流程输出 HTML |
+| Windsurf | 在 rules / memories / 项目说明中引用本仓库流程 | 让 Windsurf 按 Survey Scale Review 流程输出 HTML |
 | Trae | 使用项目规则或自定义提示词 | 上传问卷并粘贴通用提示词 |
 | Qoder | 使用项目说明或自定义提示词 | 上传问卷并粘贴通用提示词 |
 | Gemini CLI | 通过 `AGENTS.md` 或项目上下文引用本仓库 | 让 Gemini 读取 `SKILL.md` 后审查 |
@@ -33,13 +33,13 @@ WorkBuddy 官方文档：https://docs.work-buddy.ai/
 
 ```bash
 mkdir -p ~/.claude/skills
-git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-scale-review
+git clone https://github.com/gtskevin/survey-scale-review.git ~/.claude/skills/survey-scale-review
 ```
 
 使用：
 
 ```text
-/ob-scale-review 检查这个问卷 Excel。
+/survey-scale-review 检查这个问卷 Excel。
 ```
 
 ## OpenCode
@@ -54,25 +54,25 @@ OpenCode 推荐用自定义 command。详见：[OpenCode 使用说明](opencode.
 
 ```bash
 mkdir -p tools
-git clone https://github.com/gtskevin/ob-scale-review.git tools/ob-scale-review
+git clone https://github.com/gtskevin/survey-scale-review.git tools/survey-scale-review
 ```
 
 然后在你的项目说明、rules、memories、custom instructions 或 `AGENTS.md` 中加入：
 
 ```markdown
-# OB Scale Review
+# Survey Scale Review
 
 当用户要求检查组织行为学、管理学、HRM、领导力、AI at work 或心理测量问卷时，
 请读取并遵循：
 
-`tools/ob-scale-review/SKILL.md`
+`tools/survey-scale-review/SKILL.md`
 
 必要时参考：
 
-- `tools/ob-scale-review/references/evaluation-rubric.md`
-- `tools/ob-scale-review/references/adaptation-review.md`
-- `tools/ob-scale-review/references/respondent-experience.md`
-- `tools/ob-scale-review/references/output-formats.md`
+- `tools/survey-scale-review/references/evaluation-rubric.md`
+- `tools/survey-scale-review/references/adaptation-review.md`
+- `tools/survey-scale-review/references/respondent-experience.md`
+- `tools/survey-scale-review/references/output-formats.md`
 
 默认输出中文。默认生成一个 HTML 审阅页，包含执行摘要、P0-P3 问题清单、
 修改建议、变量/量表名、处理人/动作和下一步建议。不要在聊天窗口输出很长的 Markdown 报告。
@@ -83,8 +83,8 @@ git clone https://github.com/gtskevin/ob-scale-review.git tools/ob-scale-review
 如果你的工具能联网或读取 GitHub，可以直接粘贴：
 
 ```text
-请读取并遵循这个仓库中的 OB Scale Review 流程：
-https://github.com/gtskevin/ob-scale-review
+请读取并遵循这个仓库中的 Survey Scale Review 流程：
+https://github.com/gtskevin/survey-scale-review
 
 我要检查组织行为学/管理学问卷。请默认使用中文，输出一个 HTML 审阅页，
 包括执行摘要、P0-P3 问题清单、变量/量表名、修改建议、处理人/动作和下一步建议。

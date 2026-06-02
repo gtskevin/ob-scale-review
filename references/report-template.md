@@ -19,24 +19,24 @@ Place this near the top, before the dashboard. It should be useful for non-techn
 
 | 项目 | 内容 |
 |---|---|
-| OB Scale Review 本地版本 | commit 短 SHA，如果可获得 |
+| Survey Scale Review 本地版本 | commit 短 SHA，如果可获得 |
 | commit 日期 | 如果可获得 |
 | 检查新版本 | Link/button: `检查新版本` |
 | 更新方式 | 复制下面提示词，发给正在使用的 Agent |
 
 If local commit SHA is known, `检查新版本` should link to:
 
-`https://github.com/gtskevin/ob-scale-review/compare/<local-sha>...main`
+`https://github.com/gtskevin/survey-scale-review/compare/<local-sha>...main`
 
 If local commit SHA is unknown, link to:
 
-`https://github.com/gtskevin/ob-scale-review/commits/main`
+`https://github.com/gtskevin/survey-scale-review/commits/main`
 
 Use this copyable prompt:
 
 ```text
-请帮我更新 https://github.com/gtskevin/ob-scale-review 这个 Agent Skill。
-请检查 ~/.codex/skills/ob-scale-review 和 ~/.claude/skills/ob-scale-review 是否存在。
+请帮我更新 https://github.com/gtskevin/survey-scale-review 这个 Agent Skill。
+请检查 ~/.codex/skills/survey-scale-review 和 ~/.claude/skills/survey-scale-review 是否存在。
 如果目录是 git clone 安装的，请运行 git pull --ff-only 更新。
 如果不是 git 仓库，请先备份旧目录，再从 GitHub 重新安装最新版。
 完成后告诉我当前本地 commit 和日期。

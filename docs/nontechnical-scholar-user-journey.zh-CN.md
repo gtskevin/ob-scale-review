@@ -1,8 +1,8 @@
-# OB Scale Review 非技术学者用户旅程评估
+# Survey Scale Review 非技术学者用户旅程评估
 
 **状态：** 待评审
 
-本文从一个实际学者，尤其是不太懂 GitHub、命令行、Codex Skill 安装和 Python 脚本的学者视角，评估 `ob-scale-review` 从发现、理解、安装、准备材料、运行、阅读输出到采纳建议的完整使用过程。目标不是再增加功能，而是识别哪些地方会让真实用户放弃、误用或过度信任。
+本文从一个实际学者，尤其是不太懂 GitHub、命令行、Codex Skill 安装和 Python 脚本的学者视角，评估 `survey-scale-review` 从发现、理解、安装、准备材料、运行、阅读输出到采纳建议的完整使用过程。目标不是再增加功能，而是识别哪些地方会让真实用户放弃、误用或过度信任。
 
 > 📖 **核心判断**
 >
@@ -26,7 +26,7 @@
 
 当前优势：
 
-- 仓库名称 `ob-scale-review` 清楚。
+- 仓库名称 `survey-scale-review` 清楚。
 - README 关键词覆盖了 organizational behavior、survey scale review、scale adaptation、Chinese translation 等。
 - 中英文文档都有。
 
@@ -71,20 +71,20 @@
 | 不会使用命令行 | 直接无法安装 | 增加“如果你不会安装，把仓库链接发给 Codex，让 Codex 帮你安装”的说明 |
 | 不知道 `~/.codex/skills` 是什么 | 不理解安装路径 | 用自然语言解释“这是 Codex 存放自定义技能的文件夹” |
 | 安装后当前会话识别不到 | 误以为失败 | 明确说明“安装后新开一个 Codex 会话” |
-| 不知道是否安装成功 | 无反馈 | 增加测试 prompt：“请列出 $ob-scale-review 的使用方式” |
+| 不知道是否安装成功 | 无反馈 | 增加测试 prompt：“请列出 $survey-scale-review 的使用方式” |
 
 建议 README 增加一个非技术安装路径：
 
 ```text
 If you do not use the command line, open Codex and say:
-"Please install this Codex skill from https://github.com/gtskevin/ob-scale-review into my local skills folder."
+"Please install this Codex skill from https://github.com/gtskevin/survey-scale-review into my local skills folder."
 ```
 
 中文：
 
 ```text
 如果你不会使用命令行，可以在 Codex 中直接说：
-“请帮我把 https://github.com/gtskevin/ob-scale-review 安装到我的本地 Codex skills 文件夹。”
+“请帮我把 https://github.com/gtskevin/survey-scale-review 安装到我的本地 Codex skills 文件夹。”
 ```
 
 ### 4. 准备材料
@@ -292,4 +292,4 @@ README 已有 “What This Skill Does Not Do”，但在实际输出中也应反
 3. **我看完结果怎么办？**  
    回答：先修 P0，再处理 P1；RA 处理格式和占位符，研究者判断改编和构念问题。
 
-如果这三点打通，`ob-scale-review` 会更像一个真实可用的研究工作流工具，而不只是一个代码仓库。
+如果这三点打通，`survey-scale-review` 会更像一个真实可用的研究工作流工具，而不只是一个代码仓库。

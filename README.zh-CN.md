@@ -1,6 +1,6 @@
-# OB Scale Review
+# Survey Scale Review
 
-**一个面向中国组织行为学、管理学和心理测量研究者的 Agent Skill，可用于 Codex、Claude Code、WorkBuddy、OpenCode 以及支持自定义指令的主流 Agent，帮助检查英文量表翻译、中文问卷改编、配对问卷和正式发放前质量。**
+**一个面向组织行为学、管理学、营销学、管理心理学等社科研究者的 Agent Skill，可用于 Codex、Claude Code、WorkBuddy、OpenCode 以及支持自定义指令的主流 Agent，帮助检查英文量表翻译、中文问卷改编、配对问卷和正式发放前质量。**
 
 [English README](README.md) | [模板文件](templates/) | [提示词手册](docs/prompt-cookbook.zh-CN.md) | [安装与更新](docs/update.zh-CN.md) | [WorkBuddy 安装](docs/workbuddy.zh-CN.md) | [Claude Code 使用说明](docs/claude-code.zh-CN.md) | [其他 Agent](docs/other-agents.zh-CN.md) | [示例输出](examples/sample_issues.html)
 
@@ -20,12 +20,12 @@
 - T1/T2/T3 时间点和问卷正文不一致。
 - 正式问卷里还残留 `XX`、`x月x日`、内部备注或模板占位符。
 
-OB Scale Review 的目标是让 AI agent 按组织行为学、心理测量和问卷填写体验的标准，系统检查这些问题。它优先服务中国用户的真实工作场景：Excel/Word 量表整理、问卷星或腾讯问卷草稿、领导-下属配对问卷、中文语境下的表达歧义，以及研究助理和老师之间的修改协作。
+Survey Scale Review 的目标是让 AI agent 按组织行为学、管理学、心理测量和问卷填写体验的标准，系统检查这些问题。它优先服务中国用户的真实工作场景：Excel/Word 量表整理、问卷星或腾讯问卷草稿、领导-下属配对问卷、中文语境下的表达歧义，以及研究助理和老师之间的修改协作。
 
 ## 谁适合使用
 
-- 组织行为学研究者
-- 管理学、HRM、领导力、AI at work 研究者
+- 组织行为学、管理心理学研究者
+- 管理学、营销学、HRM、领导力、AI at work 研究者
 - 使用英文成熟量表并翻译/改编为中文问卷的研究者
 - 做领导-员工、主管-下属、团队成员配对问卷的研究者
 - 指导研究助理整理量表和问卷的老师
@@ -38,17 +38,17 @@ OB Scale Review 的目标是让 AI agent 按组织行为学、心理测量和问
 可以直接打开你正在使用的 Agent，比如 Codex、Claude Code、WorkBuddy、OpenCode、Cursor、Windsurf、Trae、Qoder、Gemini CLI、GitHub Copilot CLI、通义灵码、豆包 MarsCode、腾讯云 CodeBuddy 等，粘贴这段话：
 
 ```text
-请帮我把 https://github.com/gtskevin/ob-scale-review 这个 Agent Skill 安装到本地 skills 文件夹。
-如果我使用 Codex，请安装到 ~/.codex/skills/ob-scale-review。
-如果我使用 Claude Code，请安装到 ~/.claude/skills/ob-scale-review。
-如果我使用 WorkBuddy，请优先按 Claude Code Skill 路径安装到 ~/.claude/skills/ob-scale-review。
+请帮我把 https://github.com/gtskevin/survey-scale-review 这个 Agent Skill 安装到本地 skills 文件夹。
+如果我使用 Codex，请安装到 ~/.codex/skills/survey-scale-review。
+如果我使用 Claude Code，请安装到 ~/.claude/skills/survey-scale-review。
+如果我使用 WorkBuddy，请优先按 Claude Code Skill 路径安装到 ~/.claude/skills/survey-scale-review。
 如果我的工具不支持 Skill，请帮我把这个仓库作为项目说明或自定义命令接入，并告诉我之后应该输入什么命令。
 ```
 
 安装后重新开启一个会话，然后说：
 
 ```text
-用 $ob-scale-review 检查这个问卷 Excel。
+用 $survey-scale-review 检查这个问卷 Excel。
 ```
 
 ### 已经安装过，如何更新？
@@ -56,8 +56,8 @@ OB Scale Review 的目标是让 AI agent 按组织行为学、心理测量和问
 如果你之前安装过这个 Skill，建议定期更新。不会用命令行的用户可以直接把这段话发给 Codex、Claude Code 或 WorkBuddy：
 
 ```text
-请帮我更新 https://github.com/gtskevin/ob-scale-review 这个 Agent Skill。
-请检查 ~/.codex/skills/ob-scale-review 和 ~/.claude/skills/ob-scale-review 是否存在。
+请帮我更新 https://github.com/gtskevin/survey-scale-review 这个 Agent Skill。
+请检查 ~/.codex/skills/survey-scale-review 和 ~/.claude/skills/survey-scale-review 是否存在。
 如果目录是 git clone 安装的，请运行 git pull --ff-only 更新。
 如果不是 git 仓库，请先备份旧目录，再从 GitHub 重新安装最新版。
 完成后告诉我当前本地 commit 和日期。
@@ -66,8 +66,8 @@ OB Scale Review 的目标是让 AI agent 按组织行为学、心理测量和问
 命令行用户可运行：
 
 ```bash
-git -C ~/.codex/skills/ob-scale-review pull --ff-only
-git -C ~/.claude/skills/ob-scale-review pull --ff-only
+git -C ~/.codex/skills/survey-scale-review pull --ff-only
+git -C ~/.claude/skills/survey-scale-review pull --ff-only
 ```
 
 只更新你实际安装过的目录即可。更多说明见：[安装与更新指南](docs/update.zh-CN.md)。
@@ -76,13 +76,13 @@ git -C ~/.claude/skills/ob-scale-review pull --ff-only
 
 ```bash
 mkdir -p ~/.codex/skills
-git clone https://github.com/gtskevin/ob-scale-review.git ~/.codex/skills/ob-scale-review
+git clone https://github.com/gtskevin/survey-scale-review.git ~/.codex/skills/survey-scale-review
 ```
 
 重新开启一个 Codex 会话，然后说：
 
 ```text
-用 $ob-scale-review 检查这个问卷 Excel。
+用 $survey-scale-review 检查这个问卷 Excel。
 ```
 
 ### Claude Code 命令行安装
@@ -91,13 +91,13 @@ Claude Code 也支持基于 `SKILL.md` 的 Agent Skills。安装到 Claude Code 
 
 ```bash
 mkdir -p ~/.claude/skills
-git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-scale-review
+git clone https://github.com/gtskevin/survey-scale-review.git ~/.claude/skills/survey-scale-review
 ```
 
 启动 Claude Code 后使用：
 
 ```text
-/ob-scale-review 检查这个问卷 Excel。
+/survey-scale-review 检查这个问卷 Excel。
 ```
 
 详细说明见：[Claude Code 使用说明](docs/claude-code.zh-CN.md)。
@@ -108,13 +108,13 @@ WorkBuddy 官方文档说明它基于 Claude Code 和 MCP，因此最简单的�
 
 ```bash
 mkdir -p ~/.claude/skills
-git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-scale-review
+git clone https://github.com/gtskevin/survey-scale-review.git ~/.claude/skills/survey-scale-review
 ```
 
 然后在 WorkBuddy/Claude Code 会话中使用：
 
 ```text
-/ob-scale-review 检查这个问卷 Excel。
+/survey-scale-review 检查这个问卷 Excel。
 ```
 
 如果你不会用命令行，可以直接把上面“如果你不会用命令行”的安装请求发给 WorkBuddy。详细说明见：[WorkBuddy 安装说明](docs/workbuddy.zh-CN.md)。
@@ -134,7 +134,7 @@ git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-sc
 如果你的问卷不是模板格式，也可以直接说：
 
 ```text
-用 $ob-scale-review 检查这个问卷草稿。
+用 $survey-scale-review 检查这个问卷草稿。
 它不是标准模板格式，请先推断变量、填写者、时间点、英文原题、中文题项和缺失信息。
 ```
 
@@ -145,7 +145,7 @@ git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-sc
 | 方式 | 适合情况 | 你需要提供 |
 |---|---|---|
 | 现有文件 | 研究助理已经整理了 Excel、Word 或问卷草稿 | 直接上传文件并要求检查 |
-| 推荐 Excel 模板 | 新项目开始整理量表，或希望输出更结构化 | 使用 [`templates/ob_scale_review_template.xlsx`](templates/ob_scale_review_template.xlsx) |
+| 推荐 Excel 模板 | 新项目开始整理量表，或希望输出更结构化 | 使用 [`templates/survey_scale_review_template.xlsx`](templates/survey_scale_review_template.xlsx) |
 | CSV 模板 | 想用普通表格或 Google Sheets | 使用 [`variables_template.csv`](templates/variables_template.csv) 和 [`questionnaire_template.csv`](templates/questionnaire_template.csv) |
 | 纯文本 | 只有复制出来的量表条目 | 粘贴变量名、英文原题、中文翻译/改编和来源 |
 
@@ -166,7 +166,7 @@ git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-sc
 | 我只有 Word 或问卷星草稿，可以吗？ | 可以。它会更侧重结构、指导语、填写体验和发放前问题。 |
 | 我没有英文原题，可以吗？ | 可以，但无法完整判断翻译和改编是否等价。 |
 | 我用的是中文成熟量表，可以吗？ | 可以，重点检查填写体验、配对结构、时间窗口、反应选项和发放阻断。 |
-| 我不是 OB 研究，可以吗？ | 可能可以，但标准主要面向组织行为学、管理学、心理学、HRM 和问卷研究。 |
+| 我不是 OB 研究，可以吗？ | 可以。标准最初基于组织行为学和管理学设计，但营销学、管理心理学、信息系统、教育学等使用量表翻译和改编的研究同样适用。 |
 
 ## 它会检查什么
 
@@ -258,7 +258,7 @@ Skill 会站在企业员工和管理者角度检查：
 完整审阅：
 
 ```text
-用 $ob-scale-review 检查这个 Excel 问卷。
+用 $survey-scale-review 检查这个 Excel 问卷。
 重点看英文量表翻译、改编是否能向审稿人解释、反向题正向化与计分、
 领导-员工配对、被试理解歧义和正式发放前阻断问题。
 ```
@@ -266,7 +266,7 @@ Skill 会站在企业员工和管理者角度检查：
 发放前终检：
 
 ```text
-用 $ob-scale-review 做发放前终检。
+用 $survey-scale-review 做发放前终检。
 不要大幅重写所有条目，重点检查占位符、指导语、填写者不一致、时间窗口、
 反应选项和配对风险。
 ```
@@ -274,14 +274,14 @@ Skill 会站在企业员工和管理者角度检查：
 模板整理：
 
 ```text
-用 $ob-scale-review 帮我从零整理一个量表检查文件。
+用 $survey-scale-review 帮我从零整理一个量表检查文件。
 先告诉我应该把哪些信息填进模板，再开始审阅。
 ```
 
 非模板文件：
 
 ```text
-用 $ob-scale-review 检查这个问卷草稿。
+用 $survey-scale-review 检查这个问卷草稿。
 它不是模板格式，请先推断变量、填写者、时间点、来源和条目结构，
 再告诉我哪些信息缺失。
 ```
@@ -316,7 +316,7 @@ Skill 会站在企业员工和管理者角度检查：
 
 ## 关键词
 
-组织行为学，管理学研究，量表审查，问卷检查，量表翻译，量表改编，中文问卷，中国学者，问卷星，反向题，正向化，领导-员工配对问卷，主管-下属问卷，多时间点问卷，AI at work，心理测量，构念效度，条目设计，Codex Skill，Claude Code Skill，WorkBuddy，OpenCode，Cursor，Windsurf，Trae，Qoder
+组织行为学，管理学，营销学，管理心理学，量表审查，问卷检查，量表翻译，量表改编，中文问卷，中国学者，问卷星，反向题，正向化，领导-员工配对问卷，主管-下属问卷，多时间点问卷，AI at work，心理测量，构念效度，条目设计，Codex Skill，Claude Code Skill，WorkBuddy，OpenCode，Cursor，Windsurf，Trae，Qoder
 
 ## 许可证
 

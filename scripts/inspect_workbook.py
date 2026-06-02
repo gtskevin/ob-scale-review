@@ -574,7 +574,7 @@ def write_review_workbook(
     wb = Workbook()
     ws = wb.active
     ws.title = "Summary"
-    ws["A1"] = "OB Scale Review Inspection Summary"
+    ws["A1"] = "Survey Scale Review Inspection Summary"
     ws["A1"].font = Font(bold=True, size=14, color="1F4E78")
     summary_rows = [
         ("Workbook", summary["workbook"]),

@@ -1,9 +1,9 @@
 ---
-name: ob-scale-review
-description: Use when reviewing research survey scales, especially organizational behavior or management questionnaires with English source items, Chinese translations, adapted scales, reverse-coded items, paired leader-employee surveys, multi-wave surveys, or pre-launch questionnaire quality checks.
+name: survey-scale-review
+description: Use when reviewing research survey scales, for organizational behavior, management, marketing, psychology, and social science research questionnaires with English source items, Chinese translations, adapted scales, reverse-coded items, paired leader-employee surveys, multi-wave surveys, or pre-launch questionnaire quality checks.
 ---
 
-# OB Scale Review
+# Survey Scale Review
 
 Use this skill to review OB/management research questionnaires and scale translation/adaptation files. Default language is Chinese unless the user asks otherwise.
 
@@ -66,7 +66,7 @@ Choose the mode from the user's request; when unclear, use `formal_review`.
    - Self-developed/highly adapted scales: common item-writing errors and psychometric design risks.
 8. Review respondent experience: ambiguity, referents, team/leader/AI definitions, time windows, sensitive wording, response-option fit.
 9. Produce concise Chinese outputs. For formal reviews, make a custom v4-style dashboard HTML the primary user-facing artifact and keep the chat response short. If maintaining Markdown, save it only as an editable source or content draft; do not make plain `pretty-doc` output the main formal-review deliverable unless custom HTML generation is blocked. If using the user's Pretty Doc workflow, satisfy the "HTML not chat" principle with the custom dashboard HTML first; optionally also keep/render a Markdown source for editability.
-10. Add an update panel and report footer with `OB Scale Review 本地版本`, `commit 日期`, `检查新版本`, and `复制更新提示词` when possible. Do not interrupt normal review work to browse GitHub for updates unless the user asks for an update check.
+10. Add an update panel and report footer with `Survey Scale Review 本地版本`, `commit 日期`, `检查新版本`, and `复制更新提示词` when possible. Do not interrupt normal review work to browse GitHub for updates unless the user asks for an update check.
 
 ## When to load references
 
@@ -89,17 +89,17 @@ Default formal review outputs:
 
 For install/update requests, prefer these local checks:
 
-- Codex path: `~/.codex/skills/ob-scale-review`
-- Claude Code/WorkBuddy path: `~/.claude/skills/ob-scale-review`
+- Codex path: `~/.codex/skills/survey-scale-review`
+- Claude Code/WorkBuddy path: `~/.claude/skills/survey-scale-review`
 - If the directory is a git clone, update with `git -C <path> pull --ff-only`.
-- If it is not a git repository, back up the old directory and reinstall from `https://github.com/gtskevin/ob-scale-review`.
+- If it is not a git repository, back up the old directory and reinstall from `https://github.com/gtskevin/survey-scale-review`.
 - After updating, report the local commit short SHA and commit date.
 
 For report update panels:
 
 - Use the button label `检查新版本`.
-- If local commit SHA is known, link to `https://github.com/gtskevin/ob-scale-review/compare/<local-sha>...main`.
-- If local commit SHA is unknown, link to `https://github.com/gtskevin/ob-scale-review/commits/main`.
+- If local commit SHA is known, link to `https://github.com/gtskevin/survey-scale-review/compare/<local-sha>...main`.
+- If local commit SHA is unknown, link to `https://github.com/gtskevin/survey-scale-review/commits/main`.
 - Include a second button or compact text area labeled `复制更新提示词`, containing a plain-language update request for the user's current agent.
 - Make clear that clicking the link only checks whether a newer GitHub version exists; updating local files still needs the user's Agent to perform the update.
 

@@ -1,6 +1,6 @@
 # Install and Update Guide
 
-OB Scale Review will keep improving. Users who installed it earlier may continue using an older version unless they update it. Treat "update the skill" as a small pre-review step before serious questionnaire review.
+Survey Scale Review will keep improving. Users who installed it earlier may continue using an older version unless they update it. Treat "update the skill" as a small pre-review step before serious questionnaire review.
 
 ## Best Option for Non-Technical Users: Check from the Report
 
@@ -16,8 +16,8 @@ Important: a static HTML report in the browser cannot directly modify local skil
 Paste this into Codex, Claude Code, WorkBuddy, or another local-file-capable agent:
 
 ```text
-Please update the Agent Skill at https://github.com/gtskevin/ob-scale-review.
-Check whether ~/.codex/skills/ob-scale-review and ~/.claude/skills/ob-scale-review exist.
+Please update the Agent Skill at https://github.com/gtskevin/survey-scale-review.
+Check whether ~/.codex/skills/survey-scale-review and ~/.claude/skills/survey-scale-review exist.
 If the directory is a git clone, run git pull --ff-only.
 If it is not a git repository, back up the old directory and reinstall the latest version from GitHub.
 When done, tell me the local commit and commit date.
@@ -26,7 +26,7 @@ When done, tell me the local commit and commit date.
 After updating, start a new session and ask:
 
 ```text
-Use $ob-scale-review to review my questionnaire Excel file.
+Use $survey-scale-review to review my questionnaire Excel file.
 ```
 
 ## Command-Line Update
@@ -34,13 +34,13 @@ Use $ob-scale-review to review my questionnaire Excel file.
 Codex users usually run:
 
 ```bash
-git -C ~/.codex/skills/ob-scale-review pull --ff-only
+git -C ~/.codex/skills/survey-scale-review pull --ff-only
 ```
 
 Claude Code or WorkBuddy users usually run:
 
 ```bash
-git -C ~/.claude/skills/ob-scale-review pull --ff-only
+git -C ~/.claude/skills/survey-scale-review pull --ff-only
 ```
 
 If you installed the skill in both locations, run both commands.
@@ -50,14 +50,14 @@ If you installed the skill in both locations, run both commands.
 Run:
 
 ```bash
-git -C ~/.codex/skills/ob-scale-review log -1 --oneline --date=short
-git -C ~/.claude/skills/ob-scale-review log -1 --oneline --date=short
+git -C ~/.codex/skills/survey-scale-review log -1 --oneline --date=short
+git -C ~/.claude/skills/survey-scale-review log -1 --oneline --date=short
 ```
 
 Or ask your agent:
 
 ```text
-Please check my local ob-scale-review skill version. Tell me the current commit, commit date, and whether it needs updating.
+Please check my local survey-scale-review skill version. Tell me the current commit, commit date, and whether it needs updating.
 ```
 
 Newer formal review reports should include the local commit and date in the footer when available.
@@ -68,22 +68,22 @@ Some users may have downloaded a ZIP, copied a folder, or asked an agent to plac
 
 Recommended steps:
 
-1. Back up the old directory, for example by renaming it to `ob-scale-review.backup`.
+1. Back up the old directory, for example by renaming it to `survey-scale-review.backup`.
 2. Reinstall the latest version from GitHub.
 3. Start a new agent session.
 
 Codex path:
 
 ```bash
-mv ~/.codex/skills/ob-scale-review ~/.codex/skills/ob-scale-review.backup
-git clone https://github.com/gtskevin/ob-scale-review.git ~/.codex/skills/ob-scale-review
+mv ~/.codex/skills/survey-scale-review ~/.codex/skills/survey-scale-review.backup
+git clone https://github.com/gtskevin/survey-scale-review.git ~/.codex/skills/survey-scale-review
 ```
 
 Claude Code/WorkBuddy path:
 
 ```bash
-mv ~/.claude/skills/ob-scale-review ~/.claude/skills/ob-scale-review.backup
-git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-scale-review
+mv ~/.claude/skills/survey-scale-review ~/.claude/skills/survey-scale-review.backup
+git clone https://github.com/gtskevin/survey-scale-review.git ~/.claude/skills/survey-scale-review
 ```
 
 ## Recommendation for Teams
@@ -91,7 +91,7 @@ git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-sc
 If you recommend this skill to students, RAs, or collaborators, give them these two instructions:
 
 ```text
-Before serious questionnaire review, ask your agent to update ob-scale-review.
+Before serious questionnaire review, ask your agent to update survey-scale-review.
 After updating, make sure the report footer shows the local commit and date.
 ```
 

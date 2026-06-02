@@ -69,7 +69,7 @@ Include these columns in the default HTML review page. Add them to the right of 
 |---|---|
 | local_commit | Local short SHA if available; otherwise `未知` |
 | commit_date | Local commit date if available; otherwise `未知` |
-| check_update_url | `https://github.com/gtskevin/ob-scale-review/compare/<local-sha>...main` when SHA is available, otherwise `https://github.com/gtskevin/ob-scale-review/commits/main` |
+| check_update_url | `https://github.com/gtskevin/survey-scale-review/compare/<local-sha>...main` when SHA is available, otherwise `https://github.com/gtskevin/survey-scale-review/commits/main` |
 | update_prompt | Plain-language prompt users can copy into Codex/Claude Code/WorkBuddy |
 | update_note | Explain that the link checks GitHub only; the local skill updates after the Agent runs the update prompt |
 

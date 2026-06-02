@@ -1,12 +1,12 @@
-# OB Scale Review
+# Survey Scale Review
 
-**An Agent Skill for Codex, Claude Code, WorkBuddy, OpenCode, and other instruction-aware agents. It helps organizational behavior, management, and psychometrics researchers review translated scales, adapted Chinese questionnaires, paired surveys, and pre-launch survey quality.**
+**An Agent Skill for Codex, Claude Code, WorkBuddy, OpenCode, and other instruction-aware agents. It helps organizational behavior, management, marketing, psychology, and social science researchers review translated scales, adapted Chinese questionnaires, paired surveys, and pre-launch survey quality.**
 
 [中文说明](README.zh-CN.md) | [Template files](templates/) | [Prompt cookbook](docs/prompt-cookbook.md) | [Install and update](docs/update.md) | [WorkBuddy setup](docs/workbuddy.md) | [Claude Code guide](docs/claude-code.md) | [Other agents](docs/other-agents.md) | [Sample output](examples/sample_issues.html)
 
 ![Sample HTML issue table](examples/sample_issues_screenshot.png)
 
-OB Scale Review helps researchers catch the problems that often appear between **"we selected the scales"** and **"the questionnaire is ready to launch"**:
+Survey Scale Review helps researchers catch the problems that often appear between **"we selected the scales"** and **"the questionnaire is ready to launch"**:
 
 - English source scale items translated into Chinese
 - Mature scales adapted to AI, leadership, team, or work-task contexts
@@ -15,7 +15,7 @@ OB Scale Review helps researchers catch the problems that often appear between *
 - Leader-employee paired questionnaires and multi-wave survey designs
 - Pre-launch issues such as placeholders, respondent mismatch, vague referents, and unclear time windows
 
-It is designed for researchers in **organizational behavior, management, HRM, psychology, AI at work, leadership, and survey-based social science research**.
+It is designed for researchers in **organizational behavior, management, marketing, HRM, psychology, management psychology, AI at work, leadership, and survey-based social science research**.
 
 ## Why This Exists
 
@@ -37,17 +37,17 @@ This skill gives AI agents a domain-specific review workflow for these issues. I
 Open the agent you use, such as Codex, Claude Code, WorkBuddy, OpenCode, Cursor, Windsurf, Trae, Qoder, Gemini CLI, GitHub Copilot CLI, Tongyi Lingma, Doubao MarsCode, or Tencent Cloud CodeBuddy, and paste:
 
 ```text
-Please install this Agent Skill from https://github.com/gtskevin/ob-scale-review into my local skills folder.
-If I am using Codex, install it under ~/.codex/skills/ob-scale-review.
-If I am using Claude Code, install it under ~/.claude/skills/ob-scale-review.
-If I am using WorkBuddy, prefer the Claude Code skill path: ~/.claude/skills/ob-scale-review.
+Please install this Agent Skill from https://github.com/gtskevin/survey-scale-review into my local skills folder.
+If I am using Codex, install it under ~/.codex/skills/survey-scale-review.
+If I am using Claude Code, install it under ~/.claude/skills/survey-scale-review.
+If I am using WorkBuddy, prefer the Claude Code skill path: ~/.claude/skills/survey-scale-review.
 If my tool does not support skills, connect this repository as a project instruction or custom command and tell me what to type afterward.
 ```
 
 Then start a new session and ask:
 
 ```text
-Use $ob-scale-review to review my questionnaire Excel file.
+Use $survey-scale-review to review my questionnaire Excel file.
 ```
 
 ### Already Installed? Update It
@@ -55,8 +55,8 @@ Use $ob-scale-review to review my questionnaire Excel file.
 If you installed this skill earlier, update it regularly. If you do not use the command line, paste this into Codex, Claude Code, or WorkBuddy:
 
 ```text
-Please update the Agent Skill at https://github.com/gtskevin/ob-scale-review.
-Check whether ~/.codex/skills/ob-scale-review and ~/.claude/skills/ob-scale-review exist.
+Please update the Agent Skill at https://github.com/gtskevin/survey-scale-review.
+Check whether ~/.codex/skills/survey-scale-review and ~/.claude/skills/survey-scale-review exist.
 If the directory is a git clone, run git pull --ff-only.
 If it is not a git repository, back up the old directory and reinstall the latest version from GitHub.
 When done, tell me the local commit and commit date.
@@ -65,8 +65,8 @@ When done, tell me the local commit and commit date.
 Command-line users can run:
 
 ```bash
-git -C ~/.codex/skills/ob-scale-review pull --ff-only
-git -C ~/.claude/skills/ob-scale-review pull --ff-only
+git -C ~/.codex/skills/survey-scale-review pull --ff-only
+git -C ~/.claude/skills/survey-scale-review pull --ff-only
 ```
 
 Run only the command for the directory you actually use. See the [install and update guide](docs/update.md) for details.
@@ -75,13 +75,13 @@ Run only the command for the directory you actually use. See the [install and up
 
 ```bash
 mkdir -p ~/.codex/skills
-git clone https://github.com/gtskevin/ob-scale-review.git ~/.codex/skills/ob-scale-review
+git clone https://github.com/gtskevin/survey-scale-review.git ~/.codex/skills/survey-scale-review
 ```
 
 Start a new Codex session and ask:
 
 ```text
-Use $ob-scale-review to review my questionnaire Excel file.
+Use $survey-scale-review to review my questionnaire Excel file.
 ```
 
 ### Claude Code Command-Line Install
@@ -90,30 +90,30 @@ Claude Code supports `SKILL.md`-based Agent Skills. Install the same repository 
 
 ```bash
 mkdir -p ~/.claude/skills
-git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-scale-review
+git clone https://github.com/gtskevin/survey-scale-review.git ~/.claude/skills/survey-scale-review
 ```
 
 Start Claude Code and invoke:
 
 ```text
-/ob-scale-review review my questionnaire Excel file.
+/survey-scale-review review my questionnaire Excel file.
 ```
 
 See [Claude Code setup](docs/claude-code.md) for details.
 
 ### WorkBuddy Install
 
-WorkBuddy's documentation describes it as built on Claude Code and MCP, so the simplest setup is to install OB Scale Review through the Claude Code skill path:
+WorkBuddy's documentation describes it as built on Claude Code and MCP, so the simplest setup is to install Survey Scale Review through the Claude Code skill path:
 
 ```bash
 mkdir -p ~/.claude/skills
-git clone https://github.com/gtskevin/ob-scale-review.git ~/.claude/skills/ob-scale-review
+git clone https://github.com/gtskevin/survey-scale-review.git ~/.claude/skills/survey-scale-review
 ```
 
 Then use it in a WorkBuddy/Claude Code session:
 
 ```text
-/ob-scale-review review my questionnaire Excel file.
+/survey-scale-review review my questionnaire Excel file.
 ```
 
 If you do not use the command line, paste the non-command-line install request above into WorkBuddy. See [WorkBuddy setup](docs/workbuddy.md) for details.
@@ -133,7 +133,7 @@ This repository is not limited to Codex or Claude Code. Different agents can reu
 If your questionnaire is not organized in a standard format, you can still ask:
 
 ```text
-Use $ob-scale-review to review this questionnaire draft.
+Use $survey-scale-review to review this questionnaire draft.
 It is not in your template format, so first infer the structure and tell me what is missing.
 ```
 
@@ -144,7 +144,7 @@ You do **not** have to use the template, but it makes the review cleaner.
 | Option | Best for | What to provide |
 |---|---|---|
 | Existing file | You already have an RA-prepared Excel/Word/questionnaire draft | Upload the file and ask for review |
-| Recommended Excel template | You are preparing a new study or want structured review output | Use [`templates/ob_scale_review_template.xlsx`](templates/ob_scale_review_template.xlsx) |
+| Recommended Excel template | You are preparing a new study or want structured review output | Use [`templates/survey_scale_review_template.xlsx`](templates/survey_scale_review_template.xlsx) |
 | CSV templates | You prefer plain tables or Google Sheets | Use [`variables_template.csv`](templates/variables_template.csv) and [`questionnaire_template.csv`](templates/questionnaire_template.csv) |
 | Plain text | You only have copied scale items | Paste variable names, source items, translated/adapted items, and sources |
 
@@ -250,7 +250,7 @@ See an anonymized example: [sample HTML issue table](examples/sample_issues.html
 Full review:
 
 ```text
-Use $ob-scale-review to review this Excel questionnaire.
+Use $survey-scale-review to review this Excel questionnaire.
 Focus on translation quality, adapted scale defensibility, reverse-coded item handling,
 leader-employee pairing, respondent ambiguity, and launch-blocking problems.
 ```
@@ -258,7 +258,7 @@ leader-employee pairing, respondent ambiguity, and launch-blocking problems.
 Pre-launch check:
 
 ```text
-Use $ob-scale-review for a pre-launch check.
+Use $survey-scale-review for a pre-launch check.
 Do not rewrite every item; focus on placeholders, confusing instructions,
 respondent mismatch, time windows, response options, and pairing risks.
 ```
@@ -266,14 +266,14 @@ respondent mismatch, time windows, response options, and pairing risks.
 Template-first workflow:
 
 ```text
-Use $ob-scale-review. I want to prepare a scale review file from scratch.
+Use $survey-scale-review. I want to prepare a scale review file from scratch.
 Show me what to put into the template before reviewing it.
 ```
 
 Non-template workflow:
 
 ```text
-Use $ob-scale-review to inspect this questionnaire draft.
+Use $survey-scale-review to inspect this questionnaire draft.
 It may not follow your template. First infer the variables, respondents, waves,
 source items, translated items, and missing information.
 ```
@@ -312,7 +312,7 @@ The generated HTML issue table is designed for non-technical review:
 ## Repository Structure
 
 ```text
-ob-scale-review/
+survey-scale-review/
 ├── SKILL.md
 ├── README.md
 ├── README.zh-CN.md
@@ -347,14 +347,14 @@ ob-scale-review/
 └── templates/
     ├── README.md
     ├── README.zh-CN.md
-    ├── ob_scale_review_template.xlsx
+    ├── survey_scale_review_template.xlsx
     ├── variables_template.csv
     └── questionnaire_template.csv
 ```
 
 ## Keywords
 
-organizational behavior, OB research, survey scale review, questionnaire review, scale adaptation, adapted scales, Chinese translation, Chinese researchers, management research, HRM research, psychology scales, reverse-coded items, leader-employee paired survey, supervisor-subordinate survey, multi-wave survey, AI at work, psychometrics, measurement validity, construct validity, item wording, Codex skill, Claude Code skill, WorkBuddy, OpenCode, Cursor, Windsurf, Trae, Qoder
+organizational behavior, OB research, marketing research, management psychology, survey scale review, questionnaire review, scale adaptation, adapted scales, Chinese translation, Chinese researchers, management research, HRM research, psychology scales, reverse-coded items, leader-employee paired survey, supervisor-subordinate survey, multi-wave survey, AI at work, psychometrics, measurement validity, construct validity, item wording, Codex skill, Claude Code skill, WorkBuddy, OpenCode, Cursor, Windsurf, Trae, Qoder
 
 ## License
 

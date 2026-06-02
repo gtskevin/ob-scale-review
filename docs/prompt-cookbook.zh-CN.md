@@ -1,4 +1,4 @@
-# OB Scale Review 提示词手册
+# Survey Scale Review 提示词手册
 
 [English version](prompt-cookbook.md)
 
@@ -9,7 +9,7 @@
 ## 第一次使用
 
 ```text
-用 $ob-scale-review 检查这个问卷文件。
+用 $survey-scale-review 检查这个问卷文件。
 请先判断这个文件是否足够做完整审阅；如果信息不够，先列出缺失信息，
 不要直接开始评价翻译和改编质量。默认生成一个中文 HTML 审阅页。
 ```
@@ -17,7 +17,7 @@
 Claude Code：
 
 ```text
-/ob-scale-review 检查这个问卷文件。
+/survey-scale-review 检查这个问卷文件。
 请先判断这个文件是否足够做完整审阅；如果信息不够，先列出缺失信息。
 默认生成一个中文 HTML 审阅页，不要在聊天窗口输出很长的 Markdown 报告。
 ```
@@ -25,14 +25,14 @@ Claude Code：
 ## RA 快速质检
 
 ```text
-用 $ob-scale-review 做 RA 快速质检。
+用 $survey-scale-review 做 RA 快速质检。
 只检查条目数、填写者标签、时间点、来源信息、缺失中文题项和正式发放占位符。
 ```
 
 ## 完整正式审阅
 
 ```text
-用 $ob-scale-review 对这个问卷做完整审阅。
+用 $survey-scale-review 对这个问卷做完整审阅。
 请检查英文-中文翻译、改编量表是否能向审稿人解释、反向题正向化与计分、
 自编或高度改编题项风险、领导-员工配对结构、被试理解歧义、时间窗口、
 反应选项和正式发放前阻断问题。请输出一个中文 HTML 审阅页。
@@ -41,7 +41,7 @@ Claude Code：
 ## 改编量表重点审查
 
 ```text
-用 $ob-scale-review 重点检查改编量表。
+用 $survey-scale-review 重点检查改编量表。
 请逐条说明改编是否能向审稿人解释、相对原题改了什么、
 构念含义是否发生偏移，以及方法部分应如何说明改编逻辑。
 ```
@@ -49,7 +49,7 @@ Claude Code：
 ## 反向题正向化检查
 
 ```text
-用 $ob-scale-review 检查所有英文原始反向题。
+用 $survey-scale-review 检查所有英文原始反向题。
 我通常会把反向题改成中文正向表述。
 请确认正向化是否准确，以及计分说明是否需要同步修改。
 ```
@@ -57,7 +57,7 @@ Claude Code：
 ## 自编或高度改编量表检查
 
 ```text
-用 $ob-scale-review 检查自编或高度改编题项。
+用 $survey-scale-review 检查自编或高度改编题项。
 重点看 double-barreled item、引导性表述、社会赞许、
 构念污染、因果化题项、指代不清、时间范围模糊和反应选项不匹配。
 ```
@@ -65,7 +65,7 @@ Claude Code：
 ## 发放前终检
 
 ```text
-用 $ob-scale-review 做发放前终检。
+用 $survey-scale-review 做发放前终检。
 不要大幅重写所有条目，只检查 P0/P1 问题：
 占位符、指导语、填写者不一致、时间窗口、反应选项、
 配对 ID 风险和容易被不同被试理解不同的表达。
@@ -74,7 +74,7 @@ Claude Code：
 ## 非模板文件
 
 ```text
-用 $ob-scale-review 检查这个问卷草稿。
+用 $survey-scale-review 检查这个问卷草稿。
 它不是模板格式，请先推断变量、填写者、时间点、来源和条目结构，
 再告诉我哪些信息缺失，以及哪些内容仍然可以审查。
 ```
@@ -82,7 +82,7 @@ Claude Code：
 ## 生成单独的优化版问卷对照表
 
 ```text
-用 $ob-scale-review 在审阅之后生成优化版问卷对照表。
+用 $survey-scale-review 在审阅之后生成优化版问卷对照表。
 请保留原英文题项和当前中文题项，并增加建议中文、修改理由、
 优先级和研究者确认列，方便逐条比较。
 ```

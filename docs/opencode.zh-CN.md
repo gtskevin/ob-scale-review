@@ -1,4 +1,4 @@
-# 在 OpenCode 中使用 OB Scale Review
+# 在 OpenCode 中使用 Survey Scale Review
 
 [English version](opencode.md)
 
@@ -14,32 +14,32 @@ OpenCode 自定义命令文档：
 
 ```bash
 mkdir -p tools
-git clone https://github.com/gtskevin/ob-scale-review.git tools/ob-scale-review
+git clone https://github.com/gtskevin/survey-scale-review.git tools/survey-scale-review
 ```
 
 创建 OpenCode 命令文件：
 
 ```bash
 mkdir -p .opencode/commands
-cat > .opencode/commands/ob-scale-review.md <<'EOF'
+cat > .opencode/commands/survey-scale-review.md <<'EOF'
 ---
 description: Review OB/management survey scales, translated questionnaires, adapted measures, and paired survey quality.
 ---
 
-Use the OB Scale Review workflow in @tools/ob-scale-review/SKILL.md.
+Use the Survey Scale Review workflow in @tools/survey-scale-review/SKILL.md.
 
 When relevant, consult:
-- @tools/ob-scale-review/references/evaluation-rubric.md
-- @tools/ob-scale-review/references/adaptation-review.md
-- @tools/ob-scale-review/references/respondent-experience.md
-- @tools/ob-scale-review/references/output-formats.md
-- @tools/ob-scale-review/docs/prompt-cookbook.md
+- @tools/survey-scale-review/references/evaluation-rubric.md
+- @tools/survey-scale-review/references/adaptation-review.md
+- @tools/survey-scale-review/references/respondent-experience.md
+- @tools/survey-scale-review/references/output-formats.md
+- @tools/survey-scale-review/docs/prompt-cookbook.md
 
 Review the questionnaire or scale file provided in the user request.
 Default to Chinese. Create one HTML review page with an executive summary, P0-P3 issue list, variable/scale names, modification suggestions, owner/action labels, and next-step recommendations. Do not output a long Markdown report in the chat by default.
 If an Excel file is available and Python dependencies work, you may run:
 
-python tools/ob-scale-review/scripts/inspect_workbook.py <workbook-path> --outdir outputs/ob-scale-review
+python tools/survey-scale-review/scripts/inspect_workbook.py <workbook-path> --outdir outputs/survey-scale-review
 
 If the script dependencies are unavailable, do not fail. Infer the structure from the available file contents and report missing information.
 
@@ -51,7 +51,7 @@ EOF
 然后在 OpenCode 里运行：
 
 ```text
-/ob-scale-review review my questionnaire Excel file
+/survey-scale-review review my questionnaire Excel file
 ```
 
 ## 方式 B：全局命令
@@ -60,19 +60,19 @@ EOF
 
 ```bash
 mkdir -p ~/.agents/skills
-git clone https://github.com/gtskevin/ob-scale-review.git ~/.agents/skills/ob-scale-review
+git clone https://github.com/gtskevin/survey-scale-review.git ~/.agents/skills/survey-scale-review
 ```
 
 创建全局命令：
 
 ```bash
 mkdir -p ~/.config/opencode/commands
-cat > ~/.config/opencode/commands/ob-scale-review.md <<'EOF'
+cat > ~/.config/opencode/commands/survey-scale-review.md <<'EOF'
 ---
 description: Review OB/management survey scales, translated questionnaires, adapted measures, and paired survey quality.
 ---
 
-Use the OB Scale Review workflow in ~/.agents/skills/ob-scale-review/SKILL.md.
+Use the Survey Scale Review workflow in ~/.agents/skills/survey-scale-review/SKILL.md.
 Consult the repository references and templates when needed.
 Default to Chinese. Create one HTML review page and keep the chat response short.
 
@@ -87,7 +87,7 @@ EOF
 然后运行：
 
 ```text
-/ob-scale-review review my questionnaire draft
+/survey-scale-review review my questionnaire draft
 ```
 
 ## 注意
